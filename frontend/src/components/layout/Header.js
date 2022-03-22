@@ -1,7 +1,7 @@
 import  {Fragment} from 'react'
 import  '../../App.css'
 import Search from './Search'
-import {Route} from 'react-router-dom';
+import {Route, Link} from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -10,7 +10,10 @@ const Header = () => {
 <nav className="navbar row">
       <div className="col-12 col-md-3">
         <div className="navbar-brand">
+          <Link to="/">
           <img className="image" src="/images/logo.png" />
+
+          </Link>
         </div>
       </div>
 

@@ -25,8 +25,9 @@
             loading: false,
             products: action.payload.products,
             productsCount: action.payload.productsCount,
-            resPerPage: action.payload.resPerPage
-             
+            resPerPage: action.payload.resPerPage,
+            filteredProductCount: action.payload.filteredProductCount
+              
           }
 
           case ALL_PRODUCTS_FAIL:
