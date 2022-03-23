@@ -161,7 +161,7 @@ const Home = ({match}) => {
         
        
       </div>
-    </section>
+    </section> 
 
     {resPerPage < count && (
       <div className="d-flex justify-content-center mt-5">

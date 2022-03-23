@@ -1,13 +1,13 @@
 import axios from 'axios';
-import { createFactory } from 'react';
+
 
 import { 
   ALL_PRODUCTS_REQUEST,     
   ALL_PRODUCTS_SUCCESS,
   ALL_PRODUCTS_FAIL,
   PRODUCT_DETAILS_REQUEST,
-    PRODUCT_DETAILS_SUCCESS,
-    PRODUCT_DETAILS_FAIL,
+  PRODUCT_DETAILS_SUCCESS,
+  PRODUCT_DETAILS_FAIL,
 
   CLEAR_ERRORS
 

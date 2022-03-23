@@ -30,13 +30,13 @@ exports.getproducts =catchAsyncErrors (async (req, res, next) => {
        .search()
        .filter()
 
-  let products = await apiFeatures.query;
+  let products = await apiFeatures.query.clone();
   let filteredProductCount = products.length;
                                      
 
   apiFeatures.pagination(resPerPage)
 
-  products = await apiFeatures.query;
+   products = await apiFeatures.query;
   res.status(200).json({
 
     success: true,
