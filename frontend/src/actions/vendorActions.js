@@ -5,7 +5,7 @@ import{
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   CLEAR_ERRORS
-} from '../constants/userConstants';
+} from '../constants/vendorConstants';
 
 
 // Login
@@ -20,7 +20,7 @@ export const login = (email, password) => async (dispatch) => {
           }
       }
 
-      const { data } = await axios.post('/api/v1/loginuser', { email, password }, config)
+      const { data } = await axios.post('/api/v1/login', { email, password }, config)
 
       dispatch({
           type: LOGIN_SUCCESS,

@@ -10,7 +10,7 @@ export const authReducer = (state = {user: {}}, action) => {  //storing user  in
     case LOGIN_REQUEST:
       return {
           loading: true,
-          isAuthenticatedUser: false, 
+          isAuthenticatedUser: false
           
       }
 

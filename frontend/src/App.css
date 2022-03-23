@@ -48,7 +48,9 @@ nav {
 #login_btn,
 #view_btn {
   background-color: #febd69;
-  padding: 0.4rem 1.8rem;
+  padding: 2px;
+  
+  border-radius: 5px;
   font-family: calibri;
 }
 
@@ -620,3 +622,6 @@ ul.CTAs a {
   height: 18%;
   padding: 5px;
 }
+
+
+
