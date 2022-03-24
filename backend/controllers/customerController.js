@@ -10,22 +10,30 @@ const sendEmail = require('../utils/sendEmail');
 
 const crypto = require('crypto');
 
+const cloudinary = require('cloudinary');
+
 //Register a new User => /api/v1/Registeruser
 
 exports.registerUser = catchAsyncErrors (async (req, res, next) => {
- 
+  
+  const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: 'avatars',    //folder where images wll be stored
+    width: 150, 
+    crop: "scale"
+})
+  
+  
   //Pulling name email and password from body
-
   const {name, email, password} = req.body;
 
   const user = await User.create ({
     name,
     email,
-    password
-    // avatar: {
-    //   public_id: '',
-    //   url: 'https://res.cloudinary.com/finalyearprojecttt/image/upload/v1634803436/young-man-avatar-character-260nw-661669825_vbgnae.webp '
-    // }
+    password,
+    avatar: {
+      public_id: result.public_id,
+      url: result.secure_url  //secure url contain https protocol
+    }
   })
 
   sendToken(user, 200, res)

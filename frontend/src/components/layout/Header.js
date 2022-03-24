@@ -24,7 +24,7 @@ const Header = () => {
 
       <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
         <Link to="/login" className="btn ml-1" id="login_btn">Login user</Link>
-        {/* <Link to="/login" className="btn ml-1" id="login_btn">Login vendor</Link> */}
+        <Link to="/loginvendor" className="btn ml-1" id="login_btn">Login vendor</Link>
 
     
 
