@@ -4,8 +4,10 @@ import Product from "./product/Product";
 import Loader from "./layout/Loader";
 import  Pagination from 'react-js-pagination';
 import {useDispatch, useSelector} from 'react-redux';
-import { getProducts } from '../actions/productActions';
 import { useAlert } from 'react-alert';
+
+import { getProducts } from '../actions/productActions';
+
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
@@ -43,9 +45,11 @@ const Home = ({match}) => {
     
   useEffect(() => {
     if(error){
-      
-   
-      return alert.error(error);
+     
+
+      alert.success('success');
+     return alert.error(error);
+     
      }
 
   dispatch(getProducts(keyword, currentPage, price, category));  
@@ -65,9 +69,15 @@ const Home = ({match}) => {
 
 
   return (
+    
     <Fragment>
+      
+  
+
+
       {loading ? <Loader /> : null}
       <MetaData title={'buy best product online'} />
+      
       
        <h1 id="products_heading">Latest Products</h1>
        <section id="products" class="container mt-5">
@@ -76,6 +86,8 @@ const Home = ({match}) => {
       {keyword ? (           //if filter exist like keyword/mouse then we have to show the slider else 
                              //show the products
         <Fragment>
+
+          
             <div className="col-6 col-md-3 mt-12 mb-12 ">
               <div className="px-5">
                 <Range
@@ -141,6 +153,7 @@ const Home = ({match}) => {
                 </div>
 
                 </div>
+                
 
         </Fragment>
 
