@@ -8,6 +8,8 @@ import Login from "./components/user/Login";
 import vendorLogin from "./components/user/vendorLogin";
 import Register from "./components/user/Register";
 import Profile from "./components/user/Profile";
+import ProtectedRoute from "./components/route/ProtectedRoute";
+import UpdateProfile from "./components/user/UpdateProfile";
 
 import { loadUser } from "./actions/userActions";
 import store from "./store";
@@ -29,7 +31,8 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/vendorlogin" component={vendorLogin} />
         <Route path="/register" component={Register} />
-        <Route path="/user" component={Profile} exact />
+        <ProtectedRoute path="/user" component={Profile} exact />
+        <ProtectedRoute path="/user/update" component={UpdateProfile} exact />
 
         <Footer />
       </div>
