@@ -14,6 +14,10 @@ import {
   UPDATE_PROFILE_SUCCESS,
   UPDATE_PROFILE_FAIL,
   UPDATE_PROFILE_RESET,
+  UPDATE_PASSWORD_REQUEST,
+  UPDATE_PASSWORD_SUCCESS,
+  UPDATE_PASSWORD_RESET,
+  UPDATE_PASSWORD_FAIL,
   LOGIN_VENDOR_REQUEST,
   LOGIN_VENDOR_SUCCESS,
   LOGIN_VENDOR_FAIL,
@@ -124,12 +128,14 @@ export const authvReducer = (state = { vendor: {} }, action) => {
 export const userReducer = (state = {}, action) => {
   switch (action.type) {
     case UPDATE_PROFILE_REQUEST:
+    case UPDATE_PASSWORD_REQUEST:
       return {
         ...state,
         loading: true,
       };
 
     case UPDATE_PROFILE_SUCCESS:
+    case UPDATE_PASSWORD_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -137,16 +143,24 @@ export const userReducer = (state = {}, action) => {
       };
 
     case UPDATE_PROFILE_RESET:
+    case UPDATE_PASSWORD_RESET:
       return {
         ...state,
         isupdated: false,
       };
 
     case UPDATE_PROFILE_FAIL:
+    case UPDATE_PASSWORD_FAIL:
       return {
         ...state,
         loading: false,
         error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
       };
 
     default:
