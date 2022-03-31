@@ -36,6 +36,7 @@ const UpdateProfile = ({ history }) => {
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
+      console.log("got it");
     }
 
     if (isUpdated) {

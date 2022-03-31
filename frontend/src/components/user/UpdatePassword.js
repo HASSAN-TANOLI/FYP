@@ -4,10 +4,14 @@ import MetaData from "../layout/MetaData";
 
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePassword, clearErrors } from "../../actions/userActions";
+import {
+  updatePassword,
+  loadUser,
+  clearErrors,
+} from "../../actions/userActions";
 import { UPDATE_PASSWORD_RESET } from "../../constants/userConstants";
 
-const UpdatePassword = ({ history }) => {
+const UpdatePassword = ({ history, location }) => {
   const [oldPassword, setOldPassword] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,6 +19,7 @@ const UpdatePassword = ({ history }) => {
   const dispatch = useDispatch();
 
   const { error, isUpdated, loading } = useSelector((state) => state.user);
+  const redirect = location.search ? location.search.split("=")[1] : "/user";
 
   useEffect(() => {
     if (error) {
@@ -24,8 +29,8 @@ const UpdatePassword = ({ history }) => {
 
     if (isUpdated) {
       alert.success("Password updated successfully");
-
-      history.push("/user");
+      history.push(redirect);
+      //  history.push("/user");
 
       dispatch({
         type: UPDATE_PASSWORD_RESET,
