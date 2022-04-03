@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_TO_CART } from "../constants/cartConstants";
+import { ADD_TO_CART, REMOVE_ITEM_CART } from "../constants/cartConstants";
 
 export const addItemToCart = (id, quantity) => async (dispatch, getState) => {
   //getState is to get the current state
@@ -19,6 +19,15 @@ export const addItemToCart = (id, quantity) => async (dispatch, getState) => {
   });
 
   //saving data into the local storage beacuse if we reload the page we have to display the cart item which we will get from local storage
+
+  localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+};
+
+export const removeItemFromCart = (id) => async (dispatch, getState) => {
+  dispatch({
+    type: REMOVE_ITEM_CART,
+    payload: id,
+  });
 
   localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 };

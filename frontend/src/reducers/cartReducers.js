@@ -1,4 +1,4 @@
-import { ADD_TO_CART } from "../constants/cartConstants";
+import { ADD_TO_CART, REMOVE_ITEM_CART } from "../constants/cartConstants";
 
 export const cartReducer = (state = { cartItems: [] }, action) => {
   //cart items mean what does user has selected how many items he selected
@@ -22,6 +22,12 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
           cartItems: [...state.cartItems, item], //if item is not in the cart then add it to the cart
         };
       }
+
+    case REMOVE_ITEM_CART:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter((i) => i.product !== action.payload), //action.payload will be the id of that product that i want to remove from the cart. so i will filter out all the product instead that i want to delete.
+      };
 
     default:
       return state;
