@@ -5,7 +5,7 @@ import Home from "./components/Home";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import ProductDetails from "./components/product/ProductDetails";
 import Login from "./components/user/Login";
-import vendorLogin from "./components/user/vendorLogin";
+import VendorLogin from "./components/vendor/VendorLogin";
 import Register from "./components/user/Register";
 import Profile from "./components/user/Profile";
 import ProtectedRoute from "./components/route/ProtectedRoute";
@@ -34,7 +34,7 @@ function App() {
         <Route path="/product/:id" component={ProductDetails} exact />
         <Route path="/cart" component={Cart} exact />
         <Route path="/login" component={Login} />
-        <Route path="/vendorlogin" component={vendorLogin} />
+        <Route path="/loginvendor" component={VendorLogin} />
         <Route path="/register" component={Register} />
         <Route path="/userpassword/forgot" component={ForgotPassword} exact />
         <Route

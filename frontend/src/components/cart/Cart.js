@@ -123,7 +123,8 @@ const Cart = () => {
                   Subtotal:{" "}
                   <span className="order-summary-values">
                     {cartItems.reduce(
-                      (acc, item) => acc + Number(item.quantity),
+                      //using reduce becuase we have to reduce multiple values into one value
+                      (acc, item) => acc + Number(item.quantity), //acc is use as accumlator it will accumlate the total added unit in it.
                       0
                     )}{" "}
                     (Units)
@@ -138,6 +139,7 @@ const Cart = () => {
                         (acc, item) => acc + item.quantity * item.price,
                         0
                       )
+                      //after decimal we will get only two values
                       .toFixed(2)}
                   </span>
                 </p>

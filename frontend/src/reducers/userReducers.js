@@ -24,9 +24,6 @@ import {
   NEW_PASSWORD_REQUEST,
   NEW_PASSWORD_SUCCESS,
   NEW_PASSWORD_FAIL,
-  LOGIN_VENDOR_REQUEST,
-  LOGIN_VENDOR_SUCCESS,
-  LOGIN_VENDOR_FAIL,
   CLEAR_ERRORS,
 } from "../constants/userConstants";
 
@@ -78,43 +75,6 @@ export const authReducer = (state = { user: {} }, action) => {
         ...state,
         loading: false,
         isAuthenticated: false,
-        user: null,
-        error: action.payload,
-      };
-
-    case CLEAR_ERRORS:
-      return {
-        ...state,
-        error: null,
-      };
-
-    default:
-      return state;
-  }
-};
-
-export const authvReducer = (state = { vendor: {} }, action) => {
-  //storing vendor  in state
-  switch (action.type) {
-    case LOGIN_VENDOR_REQUEST:
-      return {
-        loading: true,
-        isAuthenticatedVendor: false,
-      };
-
-    case LOGIN_VENDOR_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        isAuthenticatedVendor: true,
-        user: action.payload,
-      };
-
-    case LOGIN_VENDOR_FAIL:
-      return {
-        ...state,
-        loading: false,
-        isAuthenticatedVendor: false,
         user: null,
         error: action.payload,
       };

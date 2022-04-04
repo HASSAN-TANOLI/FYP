@@ -1,6 +1,6 @@
 html,
 body {
-  font-family: 'Amazon Ember';
+  font-family: "Amazon Ember";
   width: 100%;
   height: 100%;
   margin: 0px;
@@ -49,7 +49,7 @@ nav {
 #view_btn {
   background-color: #febd69;
   padding: 2px;
-  
+
   border-radius: 5px;
   font-family: calibri;
 }
@@ -133,7 +133,7 @@ footer {
 }
 
 .rating-outer::before {
-  content: '\f006 \f006 \f006 \f006 \f006';
+  content: "\f006 \f006 \f006 \f006 \f006";
 }
 
 .rating-inner {
@@ -146,7 +146,7 @@ footer {
 }
 
 .rating-inner::before {
-  content: '\f005 \f005 \f005 \f005 \f005';
+  content: "\f005 \f005 \f005 \f005 \f005";
   color: #f8ce0b;
 }
 
@@ -203,7 +203,7 @@ footer {
   padding-left: 0;
 }
 .loader:after {
-  content: ' ';
+  content: " ";
   display: block;
   width: 64px;
   height: 64px;
@@ -534,11 +534,11 @@ footer {
 }
 
 #sidebar ul li.active > a,
-a[aria-expanded='true'] {
+a[aria-expanded="true"] {
   color: #fff;
   background: #232f3e;
 }
-a[data-toggle='collapse'] {
+a[data-toggle="collapse"] {
   position: relative;
 }
 .dropdown-toggle::after {
@@ -617,11 +617,26 @@ ul.CTAs a {
   color: grey;
 }
 
-.image{
+.image {
   width: 18%;
   height: 18%;
   padding: 5px;
 }
 
+.login-vendor {
+  text-align: center;
+  margin-left: 950px;
+  position: fixed;
+}
 
+.search {
+  width: 500px;
+  position: fixed;
+  margin-left: 300px;
+}
 
+.login-cart {
+  text-align: center;
+  margin-left: 1050px;
+  position: fixed;
+}

@@ -35,6 +35,12 @@ const Header = () => {
           <Route render={({ history }) => <Search history={history} />} />
         </div>
 
+        <div className="col-8 col-md-3 mt-4 mt-md-0  text-center">
+          <Link to="/loginvendor" className="btn mr-4" id="login_btn">
+            Vendor Login
+          </Link>
+        </div>
+
         <div className="col-12 col-md-3 mt-4 mt-md-0  text-center">
           <Link to="/cart" style={{ textDecoration: "none" }}>
             <span id="cart" className="ml-8">
