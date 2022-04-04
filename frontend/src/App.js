@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import ProductDetails from "./components/product/ProductDetails";
 import Login from "./components/user/Login";
 import VendorLogin from "./components/vendor/VendorLogin";
+import RegisterVendor from "./components/vendor/RegisterVendor";
 import Register from "./components/user/Register";
 import Profile from "./components/user/Profile";
 import ProtectedRoute from "./components/route/ProtectedRoute";
@@ -14,8 +15,9 @@ import UpdatePassword from "./components/user/UpdatePassword";
 import ForgotPassword from "./components/user/ForgotPassword";
 import NewPassword from "./components/user/NewPassword";
 import Cart from "./components/cart/Cart";
-
+import { loadVendor } from "./actions/vendorActions";
 import { loadUser } from "./actions/userActions";
+
 import store from "./store";
 
 function App() {
@@ -23,6 +25,7 @@ function App() {
 
   useEffect(() => {
     store.dispatch(loadUser());
+    store.dispatch(loadVendor());
   });
 
   return (
@@ -35,6 +38,8 @@ function App() {
         <Route path="/cart" component={Cart} exact />
         <Route path="/login" component={Login} />
         <Route path="/loginvendor" component={VendorLogin} />
+        <Route path="/registervendor" component={RegisterVendor} />
+
         <Route path="/register" component={Register} />
         <Route path="/userpassword/forgot" component={ForgotPassword} exact />
         <Route

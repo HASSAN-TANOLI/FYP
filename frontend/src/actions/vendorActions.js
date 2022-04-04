@@ -5,6 +5,12 @@ import {
   LOGIN_VENDOR_SUCCESS,
   LOGIN_VENDOR_FAIL,
   CLEAR_ERRORS,
+  REGISTER_VENDOR_REQUEST,
+  REGISTER_VENDOR_SUCCESS,
+  REGISTER_VENDOR_FAIL,
+  LOAD_VENDOR_REQUEST,
+  LOAD_VENDOR_SUCCESS,
+  LOAD_VENDOR_FAIL,
 } from "../constants/vendorConstants";
 
 // Login
@@ -32,6 +38,53 @@ export const vendorLoginn = (vendoremail, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: LOGIN_VENDOR_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+//Register User
+export const registerVendor = (userData) => async (dispatch) => {
+  try {
+    dispatch({ type: REGISTER_VENDOR_REQUEST });
+
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+
+    const { data } = await axios.post(
+      "/api/v1/registervendor",
+      userData,
+      config
+    );
+
+    dispatch({
+      type: REGISTER_VENDOR_SUCCESS,
+      payload: data.vendor,
+    });
+  } catch (error) {
+    dispatch({
+      type: REGISTER_VENDOR_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const loadVendor = () => async (dispatch) => {
+  try {
+    dispatch({ type: LOAD_VENDOR_REQUEST });
+
+    const { data } = await axios.get("/api/v1/vendor");
+
+    dispatch({
+      type: LOAD_VENDOR_SUCCESS,
+      payload: data.vendor,
+    });
+  } catch (error) {
+    dispatch({
+      type: LOAD_VENDOR_FAIL,
       payload: error.response.data.message,
     });
   }

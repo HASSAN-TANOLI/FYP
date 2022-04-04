@@ -4,10 +4,17 @@ const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
+const cloudinary = require("cloudinary");
 
 // Register new vendor => /api/v1/registervendor
 
 exports.registerVendor = catchAsyncErrors(async (req, res, next) => {
+  const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "avatars", //folder where images wll be stored
+    width: 150,
+    crop: "scale", //it will automatically set the aspect ratio of the image to
+  });
+
   const {
     vendorname,
     shopname,
@@ -26,10 +33,10 @@ exports.registerVendor = catchAsyncErrors(async (req, res, next) => {
     shopcontactno,
     vendoremail,
     password,
-    // avatar: {
-    //   public_id: '',
-    //   url: 'https://res.cloudinary.com/finalyearprojecttt/image/upload/v1634803436/young-man-avatar-character-260nw-661669825_vbgnae.webp '
-    // }
+    avatar: {
+      public_id: result.public_id,
+      url: result.secure_url, //secure url contain https protocol
+    },
   });
 
   sendToken(vendor, 200, res);
