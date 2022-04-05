@@ -11,6 +11,8 @@ import {
   LOAD_VENDOR_REQUEST,
   LOAD_VENDOR_SUCCESS,
   LOAD_VENDOR_FAIL,
+  LOGOUT_VENDOR_SUCCESS,
+  LOGOUT_VENDOR_FAIL,
 } from "../constants/vendorConstants";
 
 // Login
@@ -85,6 +87,22 @@ export const loadVendor = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: LOAD_VENDOR_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+//LogoutUser
+export const logoutVendor = () => async (dispatch) => {
+  try {
+    await axios.get("/api/v1/logoutvendor");
+
+    dispatch({
+      type: LOGOUT_VENDOR_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: LOGOUT_VENDOR_FAIL,
       payload: error.response.data.message,
     });
   }

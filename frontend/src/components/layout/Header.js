@@ -4,6 +4,7 @@ import { Route, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import { logoutUser } from "../../actions/userActions";
+import { logoutVendor } from "../../actions/vendorActions";
 
 import Search from "./Search";
 
@@ -14,9 +15,12 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const { user, loading } = useSelector((state) => state.auth);
+  const { vendor, loadingg } = useSelector((state) => state.vendor);
   const { cartItems } = useSelector((state) => state.cart);
+
   const logoutHandler = () => {
     dispatch(logoutUser());
+    dispatch(logoutVendor());
     alert.success("Logged out successfully");
   };
 
@@ -33,12 +37,6 @@ const Header = () => {
 
         <div className="col-12 col-md-6 mt-2 mt-md-0">
           <Route render={({ history }) => <Search history={history} />} />
-        </div>
-
-        <div className="col-8 col-md-3 mt-4 mt-md-0  text-center">
-          <Link to="/loginvendor" className="btn mr-4" id="login_btn">
-            Vendor Login
-          </Link>
         </div>
 
         <div className="col-12 col-md-3 mt-4 mt-md-0  text-center">
@@ -93,6 +91,59 @@ const Header = () => {
             !loading && (
               <Link to="/login" className="btn ml-4" id="login_btn">
                 Login
+              </Link>
+            )
+          )}
+
+          {vendor ? (
+            <div className="ml-3 dropdown d-inline">
+              <Link
+                to=""
+                className=" btn dropdown-toggle mr-4 text-white"
+                type="button"
+                id="dropDownMenuLink"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <figure className="avatar avatar-nav">
+                  <img
+                    src={vendor.avatar && vendor.avatar.url}
+                    alt={vendor && vendor.name}
+                    className="rounded-circle"
+                  />
+                </figure>
+                <span>{vendor && vendor.name}</span>
+              </Link>
+
+              <div className="dropdown-menu" aria-labelledby="dropDownMenuLink">
+                {vendor && vendor.role != "vendor" ? (
+                  <Link className="dropdown-item" tp="orders/user">
+                    {" "}
+                    orders{" "}
+                  </Link>
+                ) : (
+                  <Link className="dropdown-item" to="/dashboard">
+                    {" "}
+                    Dashboard{" "}
+                  </Link>
+                )}
+                <Link className="dropdown-item" to="/user">
+                  Profile
+                </Link>
+                <Link
+                  className="dropdown-item text-danger"
+                  to="/"
+                  onClick={logoutHandler}
+                >
+                  logout
+                </Link>
+              </div>
+            </div>
+          ) : (
+            !loadingg && (
+              <Link to="/loginvendor" className="btn mr-4" id="login_btn">
+                Vendor Login
               </Link>
             )
           )}

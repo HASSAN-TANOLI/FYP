@@ -8,6 +8,8 @@ import {
   LOAD_VENDOR_REQUEST,
   LOAD_VENDOR_SUCCESS,
   LOAD_VENDOR_FAIL,
+  LOGOUT_VENDOR_SUCCESS,
+  LOGOUT_VENDOR_FAIL,
   CLEAR_ERRORS,
 } from "../constants/vendorConstants";
 
@@ -17,7 +19,7 @@ export const vendorReducer = (state = { vendor: {} }, action) => {
     case REGISTER_VENDOR_REQUEST:
     case LOAD_VENDOR_REQUEST:
       return {
-        loading: true,
+        loadingg: true,
         isAuthenticatedVendor: false,
       };
 
@@ -26,24 +28,37 @@ export const vendorReducer = (state = { vendor: {} }, action) => {
     case LOAD_VENDOR_SUCCESS:
       return {
         ...state,
-        loading: false,
+        loadingg: false,
         isAuthenticatedVendor: true,
         vendor: action.payload,
       };
 
+    case LOGOUT_VENDOR_SUCCESS:
+      return {
+        loadingg: false,
+        isAuthenticatedVendor: false,
+        vendor: null,
+      };
+
     case LOAD_VENDOR_FAIL:
       return {
-        loading: false,
+        loadingg: false,
         isAuthenticatedVendor: false,
         vendor: null,
         error: action.payload,
+      };
+
+    case LOGOUT_VENDOR_FAIL:
+      return {
+        ...state,
+        erroe: action.payload,
       };
 
     case LOGIN_VENDOR_FAIL:
     case REGISTER_VENDOR_FAIL:
       return {
         ...state,
-        loading: false,
+        loadingg: false,
         isAuthenticatedVendor: false,
         vendor: null,
         error: action.payload,
