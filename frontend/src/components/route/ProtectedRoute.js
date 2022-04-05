@@ -8,6 +8,10 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     (state) => state.auth
   );
 
+  const { isAuthenticatedVendor, loadingg, vendor } = useSelector(
+    (state) => state.vendor
+  );
+
   return (
     <Fragment>
       {loading === false && (
@@ -16,6 +20,19 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
           render={(props) =>
             !isAuthenticatedUser ? (
               <Redirect to="/login" />
+            ) : (
+              <Component {...props} />
+            )
+          }
+        />
+      )}
+
+      {loadingg === false && (
+        <Route
+          {...rest}
+          render={(props) =>
+            !isAuthenticatedVendor ? (
+              <Redirect to="/loginvendor" />
             ) : (
               <Component {...props} />
             )

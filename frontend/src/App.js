@@ -9,6 +9,7 @@ import VendorLogin from "./components/vendor/VendorLogin";
 import RegisterVendor from "./components/vendor/RegisterVendor";
 import Register from "./components/user/Register";
 import Profile from "./components/user/Profile";
+import VendorProfile from "./components/vendor/VendorProfile";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import UpdateProfile from "./components/user/UpdateProfile";
 import UpdatePassword from "./components/user/UpdatePassword";
@@ -39,7 +40,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/loginvendor" component={VendorLogin} />
         <Route path="/registervendor" component={RegisterVendor} />
-
+        <Route path="/vendor" component={VendorProfile} exact />
         <Route path="/register" component={Register} />
         <Route path="/userpassword/forgot" component={ForgotPassword} exact />
         <Route

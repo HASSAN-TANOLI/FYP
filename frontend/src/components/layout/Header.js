@@ -128,7 +128,7 @@ const Header = () => {
                     Dashboard{" "}
                   </Link>
                 )}
-                <Link className="dropdown-item" to="/user">
+                <Link className="dropdown-item" to="/vendor">
                   Profile
                 </Link>
                 <Link
