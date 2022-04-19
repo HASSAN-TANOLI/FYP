@@ -10,6 +10,7 @@ import RegisterVendor from "./components/vendor/RegisterVendor";
 import Register from "./components/user/Register";
 import Profile from "./components/user/Profile";
 import VendorProfile from "./components/vendor/VendorProfile";
+import UpdateVendorProfile from "./components/vendor/UpdateVendorProfile";
 import ProtectedRoute from "./components/route/ProtectedRoute";
 import UpdateProfile from "./components/user/UpdateProfile";
 import UpdatePassword from "./components/user/UpdatePassword";
@@ -18,6 +19,9 @@ import NewPassword from "./components/user/NewPassword";
 import Cart from "./components/cart/Cart";
 import { loadVendor } from "./actions/vendorActions";
 import { loadUser } from "./actions/userActions";
+
+//admin or vendor import
+import Dashboard from "./components/admin/Dashboard";
 
 import store from "./store";
 
@@ -48,12 +52,19 @@ function App() {
           component={NewPassword}
           exact
         />
-
+        <Route path="/vendor/update" component={UpdateVendorProfile} exact />
         <ProtectedRoute path="/user" component={Profile} exact />
         <ProtectedRoute path="/user/update" component={UpdateProfile} exact />
         <ProtectedRoute
           path="/password/update"
           component={UpdatePassword}
+          exact
+        />
+
+        <ProtectedRoute
+          path="/dashboard"
+          isAdmin={true}
+          component={Dashboard}
           exact
         />
 

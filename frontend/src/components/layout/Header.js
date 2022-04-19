@@ -113,7 +113,7 @@ const Header = () => {
                     className="rounded-circle"
                   />
                 </figure>
-                <span>{vendor && vendor.name}</span>
+                <span>{vendor && vendor.vendorname}</span>
               </Link>
 
               <div className="dropdown-menu" aria-labelledby="dropDownMenuLink">

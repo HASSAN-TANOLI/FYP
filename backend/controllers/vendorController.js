@@ -169,6 +169,47 @@ exports.getVendorProfile = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// Update user profile   =>   /api/v1/user/update
+exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
+  const newVendorData = {
+    vendorname: req.body.vendorname,
+    shopname: req.body.shopname,
+    shopaddress: req.body.shopaddress,
+    vendorcontactno: req.body.vendorcontactno,
+    shopcontactno: req.body.shopcontactno,
+    vendoremail: req.body.vendoremail,
+  };
+
+  // Update avatar
+  if (req.body.avatar !== "") {
+    const vendor = await Vendor.findById(req.vendor.id);
+
+    const image_id = vendor.avatar.public_id;
+    const res = await cloudinary.v2.uploader.destroy(image_id);
+
+    const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: "avatars",
+      width: 150,
+      crop: "scale",
+    });
+
+    newVendorData.avatar = {
+      public_id: result.public_id,
+      url: result.secure_url,
+    };
+  }
+
+  const vendor = await Vendor.findByIdAndUpdate(req.vendor.id, newVendorData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+  });
+});
+
 //Logout vendor => /api/v1/logoutvendor
 
 exports.logoutVendor = catchAsyncErrors(async (req, res, next) => {

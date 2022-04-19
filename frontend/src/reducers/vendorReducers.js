@@ -10,6 +10,10 @@ import {
   LOAD_VENDOR_FAIL,
   LOGOUT_VENDOR_SUCCESS,
   LOGOUT_VENDOR_FAIL,
+  UPDATE_VENDOR_PROFILE_REQUEST,
+  UPDATE_VENDOR_PROFILE_SUCCESS,
+  UPDATE_VENDOR_PROFILE_FAIL,
+  UPDATE_VENDOR_PROFILE_RESET,
   CLEAR_ERRORS,
 } from "../constants/vendorConstants";
 
@@ -70,6 +74,38 @@ export const vendorReducer = (state = { vendor: {} }, action) => {
         error: null,
       };
 
+    default:
+      return state;
+  }
+};
+
+export const vendorrReducer = (state = {}, action) => {
+  switch (action.type) {
+    case UPDATE_VENDOR_PROFILE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case UPDATE_VENDOR_PROFILE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        idUpdated: action.payload, //is updated mean we only have to check whether user is updated or not on the backend we have a success variable that will be true or false.
+      };
+
+    case UPDATE_VENDOR_PROFILE_RESET:
+      return {
+        ...state,
+        isUpdated: false, //after updating the user i have to set isUpdated to false so that the user can update the profile again.
+      };
+
+    case UPDATE_VENDOR_PROFILE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
     default:
       return state;
   }

@@ -13,6 +13,10 @@ import {
   LOAD_VENDOR_FAIL,
   LOGOUT_VENDOR_SUCCESS,
   LOGOUT_VENDOR_FAIL,
+  UPDATE_VENDOR_PROFILE_REQUEST,
+  UPDATE_VENDOR_PROFILE_SUCCESS,
+  UPDATE_VENDOR_PROFILE_FAIL,
+  UPDATE_VENDOR_PROFILE_RESET,
 } from "../constants/vendorConstants";
 
 // Login
@@ -74,6 +78,8 @@ export const registerVendor = (userData) => async (dispatch) => {
   }
 };
 
+//load vendor
+
 export const loadVendor = () => async (dispatch) => {
   try {
     dispatch({ type: LOAD_VENDOR_REQUEST });
@@ -103,6 +109,35 @@ export const logoutVendor = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: LOGOUT_VENDOR_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+//Update vendor Profile
+export const updateVendorProfile = (vendorData) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_VENDOR_PROFILE_REQUEST });
+
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+
+    const { data } = await axios.put(
+      "/api/v1/vendor/update",
+      vendorData,
+      config
+    );
+
+    dispatch({
+      type: UPDATE_VENDOR_PROFILE_SUCCESS,
+      payload: data.vendor,
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_VENDOR_PROFILE_FAIL,
       payload: error.response.data.message,
     });
   }
