@@ -8,10 +8,6 @@ const ProtectedRoute = ({ isAdmin, component: Component, ...rest }) => {
     (state) => state.auth
   );
 
-  const { isAuthenticatedVendor, loadingg, vendor } = useSelector(
-    (state) => state.vendor
-  );
-
   return (
     <Fragment>
       {loading === false && (
@@ -22,27 +18,10 @@ const ProtectedRoute = ({ isAdmin, component: Component, ...rest }) => {
               return <Redirect to="/login" />;
             }
 
-            if (isAdmin === true && user.role !== "admin") {
-              return <Redirect to="/" />;
-            }
-
             return <Component {...props} />;
           }}
         />
       )}
-
-      {/* {loadingg === false && (
-        <Route
-          {...rest}
-          render={(props) =>
-            !isAuthenticatedVendor ? (
-              <Redirect to="/loginvendor" />
-            ) : (
-              <Component {...props} />
-            )
-          }
-        />
-      )} */}
     </Fragment>
   );
 };

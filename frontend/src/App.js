@@ -19,6 +19,7 @@ import NewPassword from "./components/user/NewPassword";
 import Cart from "./components/cart/Cart";
 import { loadVendor } from "./actions/vendorActions";
 import { loadUser } from "./actions/userActions";
+import ProtectedRoutes from "./components/route/ProtectedRoutes";
 
 //admin or vendor import
 import Dashboard from "./components/admin/Dashboard";
@@ -44,7 +45,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/loginvendor" component={VendorLogin} />
         <Route path="/registervendor" component={RegisterVendor} />
-        <Route path="/vendor" component={VendorProfile} exact />
+
         <Route path="/register" component={Register} />
         <Route path="/userpassword/forgot" component={ForgotPassword} exact />
         <Route
@@ -61,7 +62,9 @@ function App() {
           exact
         />
 
-        <ProtectedRoute
+        <ProtectedRoutes path="/vendor" component={VendorProfile} exact />
+
+        <ProtectedRoutes
           path="/dashboard"
           isAdmin={true}
           component={Dashboard}
