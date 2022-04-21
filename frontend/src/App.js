@@ -25,6 +25,7 @@ import ProtectedRoutes from "./components/route/ProtectedRoutes";
 import Dashboard from "./components/admin/Dashboard";
 
 import store from "./store";
+import ProductsList from "./components/admin/ProductList";
 
 function App() {
   //login user will be load instantly when we reload the page
@@ -68,6 +69,13 @@ function App() {
           path="/dashboard"
           isAdmin={true}
           component={Dashboard}
+          exact
+        />
+
+        <ProtectedRoutes
+          path="/admin/products"
+          isAdmin={true}
+          component={ProductsList}
           exact
         />
 
