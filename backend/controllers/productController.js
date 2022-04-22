@@ -1,11 +1,38 @@
 const Product = require("../models/product");
+const Vendor = require("../models/vendor");
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 const APIFeatures = require("../utils/apiFeatures");
+const cloudinary = require("cloudinary");
 
 //Create new Product => /api/v1/admin/product/new
 
 exports.newProduct = catchAsyncErrors(async (req, res, next) => {
+  let images = [];
+  if (typeof req.body.images === "string") {
+    //if user add one image then it will be a string not an array and if user add multiple images then it will be an array and push it to images array
+    images.push(req.body.images);
+  } else {
+    images = req.body.images;
+  }
+
+  let imagesLinks = [];
+
+  for (let i = 0; i < images.length; i++) {
+    const result = await cloudinary.v2.uploader.upload(images[i], {
+      //uploadinf images to cloudinary
+      folder: "products",
+    });
+
+    imagesLinks.push({
+      //after uploading we have to save links
+      public_id: result.public_id,
+      url: result.secure_url,
+    });
+  }
+
+  req.body.images = imagesLinks;
+
   const product = await Product.create(req.body);
 
   res.status(201).json({
@@ -41,6 +68,7 @@ exports.getproducts = catchAsyncErrors(async (req, res, next) => {
 
 // Get all products(admin) => /api/v1/admin/products
 exports.getAdminproducts = catchAsyncErrors(async (req, res, next) => {
+  // const user = await Vendor.findById(req.vendor.id);
   const products = await Product.find();
 
   res.status(200).json({

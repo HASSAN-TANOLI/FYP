@@ -11,12 +11,12 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
 
-  let outOfStock = 0;
-  products.forEach((product) => {
-    if (product.stock === 0) {
-      outOfStock += 1;
-    }
-  });
+  // let outOfStock = 0;
+  // products.forEach((product) => {
+  //   if (product.stock === 0) {
+  //     outOfStock += 1;
+  //   }
+  // });
 
   useEffect(() => {
     dispatch(getAdminProducts());
@@ -109,7 +109,7 @@ const Dashboard = () => {
                 <div className="card-body">
                   <div className="text-center card-font-size">
                     Out of Stock
-                    <br /> <b>{outOfStock}</b>
+                    {/* <br /> <b>{outOfStock}</b> */}
                   </div>
                 </div>
               </div>

@@ -80,7 +80,7 @@ export const register = (userData) => async (dispatch) => {
     });
   }
 };
-// Load user
+// Load user or user profile
 export const loadUser = () => async (dispatch) => {
   try {
     dispatch({ type: LOAD_USER_REQUEST });
