@@ -3,32 +3,42 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Home from "./components/Home";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+
+//Product Realted Routes
+
 import ProductDetails from "./components/product/ProductDetails";
+
+//user routes
 import Login from "./components/user/Login";
-import VendorLogin from "./components/vendor/VendorLogin";
-import RegisterVendor from "./components/vendor/RegisterVendor";
 import Register from "./components/user/Register";
 import Profile from "./components/user/Profile";
-import VendorProfile from "./components/vendor/VendorProfile";
-import UpdateVendorProfile from "./components/vendor/UpdateVendorProfile";
-import ProtectedRoute from "./components/route/ProtectedRoute";
 import UpdateProfile from "./components/user/UpdateProfile";
 import UpdatePassword from "./components/user/UpdatePassword";
 import ForgotPassword from "./components/user/ForgotPassword";
 import NewPassword from "./components/user/NewPassword";
-import Cart from "./components/cart/Cart";
-import { loadVendor } from "./actions/vendorActions";
 import { loadUser } from "./actions/userActions";
+
+//Vedor Routes
+import VendorLogin from "./components/vendor/VendorLogin";
+import RegisterVendor from "./components/vendor/RegisterVendor";
+import VendorProfile from "./components/vendor/VendorProfile";
+import UpdateVendorProfile from "./components/vendor/UpdateVendorProfile";
+import { loadVendor } from "./actions/vendorActions";
+
+//Protected Routes
+import ProtectedRoute from "./components/route/ProtectedRoute";
 import ProtectedRoutes from "./components/route/ProtectedRoutes";
 
-//admin or vendor import
+//Build Pc Related Routes
+import PcBuildd from "./components/pcbuild/PcBuildd";
+
+//admin or vendor realted routes
 import Dashboard from "./components/admin/Dashboard";
-
-import store from "./store";
-
 import ProductsList from "./components/admin/ProductList";
 import NewProduct from "./components/admin/NewProduct";
 
+import store from "./store";
+import Cart from "./components/cart/Cart";
 function App() {
   //login user will be load instantly when we reload the page
 
@@ -87,6 +97,8 @@ function App() {
           component={NewProduct}
           exact
         />
+
+        <Route path="/pcbuildd" component={PcBuildd} exact />
         <Footer />
       </div>
     </Router>

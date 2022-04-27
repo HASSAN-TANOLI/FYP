@@ -15,7 +15,7 @@ const NewProduct = ({ history }) => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [stock, setStock] = useState(0);
-  const [vendor, setVendor] = useState("");
+  // const [vendor, setVendor] = useState("");
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
@@ -40,6 +40,7 @@ const NewProduct = ({ history }) => {
   const dispatch = useDispatch();
 
   const { loading, error, success } = useSelector((state) => state.newProduct);
+  const { vendor} = useSelector(state => state.vendor)
 
   useEffect(() => {
     if (error) {
@@ -58,13 +59,13 @@ const NewProduct = ({ history }) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.set("userId", userId);
+    formData.set("userId", vendor._id);
     formData.set("name", name);
     formData.set("price", price);
     formData.set("description", description);
     formData.set("category", category);
     formData.set("stock", stock);
-    formData.set("vendor", vendor);
+    formData.set("vendor", vendor.name);
 
     images.forEach((image) => {
       formData.append("images", image);
@@ -181,7 +182,7 @@ const NewProduct = ({ history }) => {
                   />
                 </div>
 
-                <div className="form-group">
+                {/* <div className="form-group">
                   <label htmlFor="seller_field">Vendor Name</label>
                   <input
                     type="text"
@@ -190,7 +191,7 @@ const NewProduct = ({ history }) => {
                     value={vendor}
                     onChange={(e) => setVendor(e.target.value)}
                   />
-                </div>
+                </div> */}
 
                 <div className="form-group">
                   <label>Images</label>

@@ -1,0 +1,62 @@
+/* .wrapper__pageTitle>section {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.xs-mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.xs-col-11 {
+  width: 91.6666666667%;
+}
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+.light-mode .wrapper__pageTitle {
+  background-color: #1a1c49;
+  color: #ffffff;
+}
+
+
+.light-mode .wrapper__pageTitle .pageTitle {
+  color: #ffffff;
+}
+
+.wrapper__pageTitle .pageTitle {
+  font-size: 1.5rem;
+}
+
+.wrapper__pageTitle .pageTitle {
+  line-height: 1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-weight: 700;
+}
+
+h1{
+  margin: 0;
+    padding: 0;
+    border: 0;
+   
+    font: inherit;
+    vertical-align: baseline;
+}
+
+:-webkit-any(article, aside, nav, section) :-webkit-any(article, aside, nav, section) h1 {
+  
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+} */

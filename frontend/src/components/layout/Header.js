@@ -40,6 +40,9 @@ const Header = () => {
         </div>
 
         <div className="col-12 col-md-3 mt-4 mt-md-0  text-center">
+          <Link to="/pcbuildd" className="btn ml-1" id="login_btn">
+            Build Pc
+          </Link>
           <Link to="/cart" style={{ textDecoration: "none" }}>
             <span id="cart" className="ml-8">
               Cart

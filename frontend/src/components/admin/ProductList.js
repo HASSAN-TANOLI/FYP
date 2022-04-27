@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MDBDataTable } from "mdbreact";
 
@@ -15,6 +15,8 @@ const ProductsList = ({ history }) => {
   const dispatch = useDispatch();
 
   const { loading, error, products } = useSelector((state) => state.products);
+  const { vendor} = useSelector(state => state.vendor)
+  const [vendorProducts, setVendorProducts] = useState([]);
   // const { error: deleteError, isDeleted } = useSelector(
   //   (state) => state.product
   // );
@@ -71,7 +73,8 @@ const ProductsList = ({ history }) => {
     };
 
     products.forEach((product) => {
-      data.rows.push({
+      if(product.userId === vendor._id)
+      {data.rows.push({
         id: product._id,
         name: product.name,
         price: `$${product.price}`,
@@ -92,7 +95,7 @@ const ProductsList = ({ history }) => {
             </button>
           </Fragment>
         ),
-      });
+      });}
     });
 
     return data;
