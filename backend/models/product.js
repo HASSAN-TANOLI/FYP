@@ -70,7 +70,7 @@ const productSchema = new mongoose.Schema({
     }
   },
 
-  vendorname: {
+  vendor: {
     type: String,
     required: [true, 'Please enter product vendor']
   },

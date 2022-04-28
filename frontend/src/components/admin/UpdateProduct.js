@@ -5,98 +5,133 @@ import Sidebar from "./Sidebar";
 
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
-import { newProduct, clearErrors } from "../../actions/productActions";
-import { NEW_PRODUCT_RESET } from "../../constants/productConstant";
+import { updateProduct, getProductDetails, clearErrors } from "../../actions/productActions";
+import { UPDATE_PRODUCT_RESET } from "../../constants/productConstant";
 
-const NewProduct = ({ history }) => {
-  const [userId, setUserId] = useState("");
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [stock, setStock] = useState(0);
-  // const [vendor, setVendor] = useState("");
-  const [images, setImages] = useState([]);
-  const [imagesPreview, setImagesPreview] = useState([]);
+const UpdateProduct = ({match, history}) => {
 
-  const categories = [
-    "Electronics",
-    "Laptops",
-    "Mobiles",
-    "Computers",
-    "Accessories",
-    "MotherBoards",
-    "Processors",
-    "GraphicCards",
-    "Ram",
-    "HardDisks",
-    "SSD",
-    "KeyBoards",
-    "Mouse",
-    "Headphones",
-  ];
+  
+    const [userId, setUserId] = useState("");
+    const [name, setName] = useState("");
+    const [price, setPrice] = useState(0);
+    const [description, setDescription] = useState("");
+    const [category, setCategory] = useState("");
+    const [stock, setStock] = useState(0);
+    // const [vendorName, setVendorName] = useState("");
 
-  const alert = useAlert();
-  const dispatch = useDispatch();
+    const [images, setImages] = useState([]);
+    const [oldImages, setOldImages] = useState([]);
+    const [imagesPreview, setImagesPreview] = useState([]);
 
-  const { loading, error, success } = useSelector((state) => state.newProduct);
-  const { vendor} = useSelector(state => state.vendor)
+    const categories = [
+      "Electronics",
+      "Laptops",
+      "Mobiles",
+      "Computers",
+      "Accessories",
+      "MotherBoards",
+      "Processors",
+      "GraphicCards",
+      "Ram",
+      "HardDisks",
+      "SSD",
+      "KeyBoards",
+      "Mouse",
+      "Headphones",
+    ];
+  
 
-  useEffect(() => {
-    if (error) {
-      alert.error(error);
-      dispatch(clearErrors());
-    }
 
-    if (success) {
-      history.push("/admin/products");
-      alert.success("Product created successfully");
-      dispatch({ type: NEW_PRODUCT_RESET });
-    }
-  }, [dispatch, alert, error, success, history]);
+    const alert = useAlert();
+    const dispatch = useDispatch();
 
-  const submitHandler = (e) => {
-    e.preventDefault();
+    const {error, product}= useSelector((state) => state.productDetails);
+  
+    const { loading, error: updateError, isUpdated } = useSelector((state) => state.product);
+    const { vendor} = useSelector(state => state.vendor)
 
-    const formData = new FormData();
-    formData.set("userId", vendor._id);
-    formData.set("name", name);
-    formData.set("price", price);
-    formData.set("description", description);
-    formData.set("category", category);
-    formData.set("stock", stock);
-    formData.set("vendor", vendor.name);
+    const productId = match.params.id;
 
-    images.forEach((image) => {
-      formData.append("images", image);
-    });
+    useEffect(() => {
 
-    dispatch(newProduct(formData));
-  };
+      if(product && product._id !== productId){  //if the product id is not equal to match.params.id
+        dispatch(getProductDetails(productId));
 
-  const onChange = (e) => {
-    const files = Array.from(e.target.files);
+      }
+      else{
+        setUserId=product.userId;
+        setName=product.name;
+        setPrice=product.price;
+        setDescription=product.description;
+        setCategory=product.category;
+        setStock=product.stock;
+        // setVendorName=product.vendorName;
+        setOldImages(product.images);
+       
+      }
 
-    setImagesPreview([]); //if user add images again so we have to set old selected images to empty array
-    setImages([]);
+      if (error) {
+        alert.error(error);
+        dispatch(clearErrors());
+      }
 
-    files.forEach((file) => {
-      const reader = new FileReader();
+      if (updateError) {
+        alert.error(updateError);
+        dispatch(clearErrors());
+      }
+  
+      if (isUpdated) {
+        history.push("/admin/products");
+        alert.success("Product Updated successfully");
+        dispatch({ type: UPDATE_PRODUCT_RESET });
+      }
+    }, [dispatch, alert, error, isUpdated, history, updateError], productId);
+  
 
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setImagesPreview((oldArray) => [...oldArray, reader.result]); //it will spread the previous array of image and add new image to it
-          setImages((oldArray) => [...oldArray, reader.result]);
-        }
-      };
-
-      reader.readAsDataURL(file);
-    });
-  };
+    const submitHandler = (e) => {
+      e.preventDefault();
+  
+      const formData = new FormData();
+      formData.set("userId", vendor._id);
+      formData.set("name", name);
+      formData.set("price", price);
+      formData.set("description", description);
+      formData.set("category", category);
+      formData.set("stock", stock);
+      // formData.set("vendor", vendor.name);
+  
+      images.forEach((image) => {
+        formData.append("images", image);
+      });
+  
+      dispatch(updateProduct(product._id, formData));
+    };
+  
+    const onChange = (e) => {
+      const files = Array.from(e.target.files);
+  
+      setImagesPreview([]); //if user add images again so we have to set old selected images to empty array
+      setImages([]);
+      setOldImages([]);
+  
+      files.forEach((file) => {
+        const reader = new FileReader();
+  
+        reader.onload = () => {
+          if (reader.readyState === 2) {
+            setImagesPreview((oldArray) => [...oldArray, reader.result]); //it will spread the previous array of image and add new image to it
+            setImages((oldArray) => [...oldArray, reader.result]);
+          }
+        };
+  
+        reader.readAsDataURL(file);
+      });
+    };
+  
 
   return (
     <Fragment>
-      <MetaData title={"New Product"} />
+      <MetaData title={"Update Product"} />
       <div className="row">
         <div className="col-12 col-md-2">
           <Sidebar />
@@ -110,7 +145,7 @@ const NewProduct = ({ history }) => {
                 onSubmit={submitHandler}
                 encType="multipart/form-data"
               >
-                <h1 className="mb-4">New Product</h1>
+                <h1 className="mb-4">Update Product</h1>
 
                 <div className="form-group">
                   <label htmlFor="name_field">User Id</label>
@@ -210,6 +245,11 @@ const NewProduct = ({ history }) => {
                     </label>
                   </div>
 
+                  {oldImages && oldImages.map(img => (
+                    <img src={img.url} key={img} alt={img.url} className="mt-3 mr-2" width="55"
+                    height="52" /> 
+                  ))}
+
                   {imagesPreview.map((img) => (
                     <img
                       src={img}
@@ -228,7 +268,7 @@ const NewProduct = ({ history }) => {
                   className="btn btn-block py-3"
                   disabled={loading ? true : false}
                 >
-                  CREATE
+                 UPDATE
                 </button>
               </form>
             </div>
@@ -236,7 +276,7 @@ const NewProduct = ({ history }) => {
         </div>
       </div>
     </Fragment>
-  );
-};
+  )
+}
 
-export default NewProduct;
+export default UpdateProduct

@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import ProductDetails from "./components/product/ProductDetails";
 
+
 //user routes
 import Login from "./components/user/Login";
 import Register from "./components/user/Register";
@@ -36,9 +37,11 @@ import PcBuildd from "./components/pcbuild/PcBuildd";
 import Dashboard from "./components/admin/Dashboard";
 import ProductsList from "./components/admin/ProductList";
 import NewProduct from "./components/admin/NewProduct";
+import updateProduct from "./components/admin/UpdateProduct";
 
 import store from "./store";
 import Cart from "./components/cart/Cart";
+import UpdateProduct from "./components/admin/UpdateProduct";
 function App() {
   //login user will be load instantly when we reload the page
 
@@ -95,6 +98,13 @@ function App() {
           path="/admin/product/new"
           isAdmin={true}
           component={NewProduct}
+          exact
+        />
+
+<ProtectedRoutes
+          path="/admin/product/:id"
+          isAdmin={true}
+          component={UpdateProduct}
           exact
         />
 
