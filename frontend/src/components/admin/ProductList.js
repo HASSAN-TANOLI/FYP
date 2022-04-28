@@ -8,7 +8,8 @@ import Sidebar from "./Sidebar";
 
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
-import { getAdminProducts, clearErrors } from "../../actions/productActions";
+import { getAdminProducts, deleteProduct, clearErrors } from "../../actions/productActions";
+import {DELETE_PRODUCT_RESET} from "../../constants/productConstant"
 
 const ProductsList = ({ history }) => {
   const alert = useAlert();
@@ -17,9 +18,10 @@ const ProductsList = ({ history }) => {
   const { loading, error, products } = useSelector((state) => state.products);
   const { vendor} = useSelector(state => state.vendor)
   const [vendorProducts, setVendorProducts] = useState([]);
-  // const { error: deleteError, isDeleted } = useSelector(
-  //   (state) => state.product
-  // );
+
+  const { error: deleteError, isDeleted } = useSelector(
+    (state) => state.product
+  );
 
   useEffect(() => {
     dispatch(getAdminProducts());
@@ -29,17 +31,17 @@ const ProductsList = ({ history }) => {
       dispatch(clearErrors());
     }
 
-    // if (deleteError) {
-    //   alert.error(deleteError);
-    //   dispatch(clearErrors());
-    // }
+    if (deleteError) {
+      alert.error(deleteError);
+      dispatch(clearErrors());
+    }
 
-    // if (isDeleted) {
-    //   alert.success("Product deleted successfully");
-    //   history.push("/admin/products");
-    //   dispatch({ type: DELETE_PRODUCT_RESET });
-    // }
-  }, [dispatch, alert, error]);
+    if (isDeleted) {
+      alert.success("Product deleted successfully");
+      history.push("/admin/products");
+      dispatch({ type: DELETE_PRODUCT_RESET });
+    }
+  }, [dispatch, alert, error, deleteError, isDeleted, history]);
 
   const setProducts = () => {
     const data = {
@@ -89,7 +91,7 @@ const ProductsList = ({ history }) => {
             </Link>
             <button
               className="btn btn-danger py-1 px-2 ml-2"
-              // onClick={() => deleteProductHandler(product._id)}
+              onClick={() => deleteProductHandler(product._id)}
             >
               <i className="fa fa-trash"></i>
             </button>
@@ -101,9 +103,9 @@ const ProductsList = ({ history }) => {
     return data;
   };
 
-  // const deleteProductHandler = (id) => {
-  //   dispatch(deleteProduct(id));
-  // };
+  const deleteProductHandler = (id) => {
+    dispatch(deleteProduct(id));
+  };
 
   return (
     <Fragment>

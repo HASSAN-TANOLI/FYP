@@ -15,7 +15,7 @@ const NewProduct = ({ history }) => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [stock, setStock] = useState(0);
-  // const [vendor, setVendor] = useState("");
+  // const [vendorName, setVendorName] = useState("");
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
