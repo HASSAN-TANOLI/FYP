@@ -1,6 +1,6 @@
-import { ADD_TO_CART, REMOVE_ITEM_CART } from "../constants/cartConstants";
+import { ADD_TO_CART, REMOVE_ITEM_CART, SAVE_SHIPPING_INFO } from "../constants/cartConstants";
 
-export const cartReducer = (state = { cartItems: [] }, action) => {
+export const cartReducer = (state = { cartItems: [], shippingInfo: {} }, action) => {
   //cart items mean what does user has selected how many items he selected
   switch (action.type) {
     case ADD_TO_CART:
@@ -28,6 +28,12 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
         ...state,
         cartItems: state.cartItems.filter((i) => i.product !== action.payload), //action.payload will be the id of that product that i want to remove from the cart. so i will filter out all the product instead that i want to delete.
       };
+
+      case SAVE_SHIPPING_INFO:
+        return{
+          ...state,
+          shippingInfo: action.payload
+        }
 
     default:
       return state;

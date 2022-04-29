@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Home from "./components/Home";
@@ -40,15 +40,33 @@ import NewProduct from "./components/admin/NewProduct";
 import updateProduct from "./components/admin/UpdateProduct";
 
 import store from "./store";
+
+//cart shippingInfo and order
 import Cart from "./components/cart/Cart";
+import Shipping from "./components/cart/Shipping";
+import ConfirmOrder from "./components/cart/ConfirmOrder";
+
+
+
 import UpdateProduct from "./components/admin/UpdateProduct";
+
+import axios from "axios";
+
 function App() {
   //login user will be load instantly when we reload the page
+
+const[stripeApiKey, setStripeApiKey] = useState('')
 
   useEffect(() => {
     store.dispatch(loadUser());
     store.dispatch(loadVendor());
-  });
+
+    async function getStripeApiKey() {
+      const {data} = await axios.get('/api/v1/stripeapi');
+      setStripeApiKey(data.stripeApiKey);
+    }
+    getStripeApiKey();
+  },[]);
 
   return (
     <Router>
@@ -58,6 +76,10 @@ function App() {
         <Route path="/search/:keyword" component={Home} />
         <Route path="/product/:id" component={ProductDetails} exact />
         <Route path="/cart" component={Cart} exact />
+        <ProtectedRoute path="/shipping" component={Shipping} />
+
+        <ProtectedRoute path="/order/confirm" component={ConfirmOrder} />
+
         <Route path="/login" component={Login} />
         <Route path="/loginvendor" component={VendorLogin} />
         <Route path="/registervendor" component={RegisterVendor} />
