@@ -9,6 +9,7 @@ import { logoutVendor } from "../../actions/vendorActions";
 import Search from "./Search";
 
 import "../../App.css";
+import './header.css'
 
 const Header = () => {
   const alert = useAlert();
@@ -35,7 +36,7 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="col-12 col-md-6 mt-2 mt-md-0">
+        <div className="col-12 col-md-6 mt-2 mt-md-0  searchbar">
           <Route render={({ history }) => <Search history={history} />} />
         </div>
 

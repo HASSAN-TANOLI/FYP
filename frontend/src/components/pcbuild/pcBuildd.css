@@ -122,3 +122,13 @@ th {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg)
 }
+
+
+.combobox{
+    margin-left: 10px;
+    position: relative;
+    display: inline-block;
+    width: 10%;
+  
+  
+}
