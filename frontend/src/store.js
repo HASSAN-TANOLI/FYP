@@ -13,7 +13,7 @@ import {
   forgotPasswordReducer,
 } from "./reducers/userReducers";
 
-import { vendorReducer, vendorrReducer } from "./reducers/vendorReducers";
+import { vendorReducer, vendorrReducer, allVendorsReducer } from "./reducers/vendorReducers";
 
 import { cartReducer } from "./reducers/cartReducers";
 
@@ -25,6 +25,7 @@ const reducer = combineReducers({
   auth: authReducer,
   vendor: vendorReducer,
   vendorr: vendorrReducer,
+  allVendors: allVendorsReducer,
 
   user: userReducer,
   forgotPassword: forgotPasswordReducer,

@@ -1,7 +1,21 @@
-import React, { Fragment } from "react";
+
+import React, { Fragment, useEffect } from 'react'
+
+
+
 import "./pcBuildd.css";
 
-const PcBuildd = () => {
+const PcBuildd = ({vendors}) => {
+
+  
+
+     
+
+  
+
+   
+
+
   return (
     <Fragment>
       <div class="container">

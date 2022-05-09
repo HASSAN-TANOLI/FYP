@@ -37,7 +37,7 @@ import PcBuildd from "./components/pcbuild/PcBuildd";
 import Dashboard from "./components/admin/Dashboard";
 import ProductsList from "./components/admin/ProductList";
 import NewProduct from "./components/admin/NewProduct";
-import updateProduct from "./components/admin/UpdateProduct";
+
 
 import store from "./store";
 
@@ -45,12 +45,17 @@ import store from "./store";
 import Cart from "./components/cart/Cart";
 import Shipping from "./components/cart/Shipping";
 import ConfirmOrder from "./components/cart/ConfirmOrder";
+import Payment from "./components/cart/Payment";
 
 
 
 import UpdateProduct from "./components/admin/UpdateProduct";
 
 import axios from "axios";
+
+//payment
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 function App() {
   //login user will be load instantly when we reload the page
@@ -63,6 +68,8 @@ const[stripeApiKey, setStripeApiKey] = useState('')
 
     async function getStripeApiKey() {
       const {data} = await axios.get('/api/v1/stripeapi');
+
+      console.log(data.stripeApiKey);
       setStripeApiKey(data.stripeApiKey);
     }
     getStripeApiKey();
@@ -79,6 +86,13 @@ const[stripeApiKey, setStripeApiKey] = useState('')
         <ProtectedRoute path="/shipping" component={Shipping} />
 
         <ProtectedRoute path="/order/confirm" component={ConfirmOrder} />
+
+    {/* //we pass stripeApiKey on backend */}
+        {stripeApiKey &&
+         <Elements stripe={loadStripe(stripeApiKey)}>
+          <ProtectedRoute path="/payment" component={Payment} />
+          </Elements>
+           }
 
         <Route path="/login" component={Login} />
         <Route path="/loginvendor" component={VendorLogin} />

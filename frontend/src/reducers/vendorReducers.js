@@ -14,6 +14,9 @@ import {
   UPDATE_VENDOR_PROFILE_SUCCESS,
   UPDATE_VENDOR_PROFILE_FAIL,
   UPDATE_VENDOR_PROFILE_RESET,
+  ALL_VENDORS_REQUEST,
+  ALL_VENDORS_SUCCESS,
+  ALL_VENDORS_FAIL,
   CLEAR_ERRORS,
 } from "../constants/vendorConstants";
 
@@ -106,6 +109,45 @@ export const vendorrReducer = (state = {}, action) => {
         loading: false,
         error: action.payload,
       };
+    default:
+      return state;
+  }
+};
+
+//getting all user reducers
+export const allVendorsReducer = (state = {vendors: []}, action) => {
+  switch (action.type) {
+    
+    case ALL_VENDORS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      
+      };
+
+   
+
+    case ALL_VENDORS_SUCCESS:
+      return {
+        ...state,
+        vendors: action.payload,
+      };
+
+    
+    case ALL_VENDORS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
     default:
       return state;
   }

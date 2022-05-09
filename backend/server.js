@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 //Handle uncaught expection
 
 process.on('uncaughtException' , err => {
-  console.log(`ERROR: ${err.message}`);
+  console.log(`ERROR: ${err.stack}`);
   console.log('Shutting down the server due to uncaught Exception');
   process.exit(1)
 })

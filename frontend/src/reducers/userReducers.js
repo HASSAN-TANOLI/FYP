@@ -24,9 +24,7 @@ import {
   NEW_PASSWORD_REQUEST,
   NEW_PASSWORD_SUCCESS,
   NEW_PASSWORD_FAIL,
-  ALL_USERS_REQUEST,
-  ALL_USERS_SUCCESS,
-  ALL_USERS_FAIL,
+ 
   CLEAR_ERRORS,
 } from "../constants/userConstants";
 
@@ -178,41 +176,3 @@ export const forgotPasswordReducer = (state = {}, action) => {
   }
 };
 
-//getting all user reducers
-export const allUsersReducer = (state = {users: []}, action) => {
-  switch (action.type) {
-    
-    case ALL_USERS_REQUEST:
-      return {
-        ...state,
-        loading: true,
-      
-      };
-
-   
-
-    case ALL_USERS_SUCCESS:
-      return {
-        ...state,
-        users: action.payload,
-      };
-
-    
-    case ALL_USERS_FAIL:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
-      };
-
-    case CLEAR_ERRORS:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
-      };
-
-    default:
-      return state;
-  }
-};

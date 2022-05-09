@@ -16,7 +16,9 @@ import {
   UPDATE_VENDOR_PROFILE_REQUEST,
   UPDATE_VENDOR_PROFILE_SUCCESS,
   UPDATE_VENDOR_PROFILE_FAIL,
-  UPDATE_VENDOR_PROFILE_RESET,
+  ALL_VENDORS_REQUEST,
+  ALL_VENDORS_SUCCESS,
+  ALL_VENDORS_FAIL,
 } from "../constants/vendorConstants";
 
 // Login
@@ -142,6 +144,27 @@ export const updateVendorProfile = (vendorData) => async (dispatch) => {
     });
   }
 };
+
+// Get all Vendors
+export const allVendors = () => async (dispatch) => {
+  try {
+
+      dispatch({ type: ALL_VENDORS_REQUEST })
+
+      const { data } = await axios.get('/api/v1/admin/vendors')
+
+      dispatch({
+          type: ALL_VENDORS_SUCCESS,
+          payload: data.vendors
+      })
+
+  } catch (error) {
+      dispatch({
+          type: ALL_VENDORS_FAIL,
+          payload: error.response.data.message
+      })
+  }
+}
 
 //Clear Errors
 
