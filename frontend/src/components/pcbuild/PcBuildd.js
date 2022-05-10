@@ -186,6 +186,10 @@ const PcBuildd = ({vendors}) => {
                   </tbody>
                 </table>
               </div>
+              <br></br>
+              <br></br>
+              <label class="totalAmount">Total Amount: </label><br></br>
+              
             </div>
           </div>
         </div>

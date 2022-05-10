@@ -34,6 +34,10 @@ const NewProduct = ({ history }) => {
     "KeyBoards",
     "Mouse",
     "Headphones",
+    'Cpu',
+    'PowerSupply',
+    'Case',
+    'Monitor',
   ];
 
   const alert = useAlert();

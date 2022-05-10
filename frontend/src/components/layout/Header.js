@@ -122,9 +122,9 @@ const Header = () => {
 
               <div className="dropdown-menu" aria-labelledby="dropDownMenuLink">
                 {vendor && vendor.role != "vendor" ? (
-                  <Link className="dropdown-item" tp="orders/user">
-                    {" "}
-                    orders{" "}
+                  <Link className="dropdown-item" to="orders/user">
+                    
+                    orders
                   </Link>
                 ) : (
                   <Link className="dropdown-item" to="/dashboard">

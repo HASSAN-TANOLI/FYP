@@ -46,6 +46,10 @@ import Cart from "./components/cart/Cart";
 import Shipping from "./components/cart/Shipping";
 import ConfirmOrder from "./components/cart/ConfirmOrder";
 import Payment from "./components/cart/Payment";
+import orderSuccess from "./components/cart/orderSuccess";
+import ListOrders from "./components/order/ListOrders";
+import OrderDetails from "./components/order/orderDetails";
+import OrdersList from "./components/admin/OrdersList";
 
 
 
@@ -82,10 +86,18 @@ const[stripeApiKey, setStripeApiKey] = useState('')
         <Route path="/" component={Home} exact />
         <Route path="/search/:keyword" component={Home} />
         <Route path="/product/:id" component={ProductDetails} exact />
+
+
         <Route path="/cart" component={Cart} exact />
         <ProtectedRoute path="/shipping" component={Shipping} />
 
         <ProtectedRoute path="/order/confirm" component={ConfirmOrder} />
+        <ProtectedRoute path="/success" component={orderSuccess} />
+
+        <ProtectedRoute path="/orders/user" component={ListOrders} />
+        <ProtectedRoute path="/order/:id" component={OrderDetails} />
+        <ProtectedRoutes path="/admin/orders" isAdmin={true} component={OrdersList} exact/>
+
 
     {/* //we pass stripeApiKey on backend */}
         {stripeApiKey &&

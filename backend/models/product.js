@@ -64,7 +64,11 @@ const productSchema = new mongoose.Schema({
         'SSD',
         'KeyBoards',
         'Mouse',
-        'Headphones'
+        'Headphones',
+        'Cpu',
+        'PowerSupply',
+        'Case',
+        'Monitor',
       ],
       message: 'Please select the following catogorize'
     }
