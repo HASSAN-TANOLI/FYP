@@ -7,6 +7,7 @@ import Sidebar from "./Sidebar";
 import { getAdminProducts } from "../../actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
 
+
 const Dashboard = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);

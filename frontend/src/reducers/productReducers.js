@@ -21,6 +21,10 @@ import {
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
   PRODUCT_DETAILS_FAIL,
+
+  SELECT_ALL_PRODUCT_REQUEST,
+  SELECT_ALL_PRODUCT_SUCCESS,
+  SELECT_ALL_PRODUCT_FAIL,
   CLEAR_ERRORS,
 } from "../constants/productConstant";
 
@@ -195,3 +199,39 @@ export const productReducer = (state = { }, action) => {
 };
 
 
+//get All products for PcBuildd page
+
+export const allProductsReducers = (state = { products: [] }, action) => {
+  switch (action.type) {
+    case SELECT_ALL_PRODUCT_REQUEST:
+    
+    return {
+        loading: true,
+        products: [],
+      };
+
+    case SELECT_ALL_PRODUCT_SUCCESS:
+      return {
+        loading: false,
+        products: action.payload,
+        
+        
+      };
+
+    case SELECT_ALL_PRODUCT_FAIL:
+    
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};

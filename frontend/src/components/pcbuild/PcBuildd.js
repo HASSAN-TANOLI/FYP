@@ -1,29 +1,50 @@
 
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
+import {allVendors} from "../../actions/vendorActions";
+import {allProducts} from "../../actions/productActions";
 
+import { useAlert } from 'react-alert'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 import "./pcBuildd.css";
 
-const PcBuildd = ({vendors}) => {
+const PcBuildd = ({}) => {
 
-  
+  const dispatch = useDispatch();
+  const {vendors} = useSelector(state => state.allVendors);
+  const {products} = useSelector(state => state.allProducts);
 
-     
+  const [vendorProducts, setVendorProducts] = useState([]);
+  const [selectedVendor, setSelectedVendor] = useState({});
+  const [build, setBuild] = useState({});
 
-  
 
-   
+  useEffect(() => {
+    dispatch(allProducts());
+  })
 
+
+  useEffect(() => {
+    console.log('selected Vendor', selectedVendor);
+    
+    console.log(products);
+    const _products = products.filter(p => p?.userId === selectedVendor);
+    setVendorProducts([..._products]);
+  },[selectedVendor])
 
   return (
     <Fragment>
       <div class="container">
         <label>Select a Store: </label>
 
-        <select className="combobox">
-          <option> </option>
-         
+        <select className="combobox" onChange={e => setSelectedVendor(e.target.value)}>
+          <option value={null} selected>Select a vandor</option>
+          {
+            vendors.map(vendor => {
+              return <option value={vendor._id} key={vendor._id} >{vendor.shopname}</option>
+            })
+          }
         </select>
 
         <div class="row">
@@ -37,7 +58,6 @@ const PcBuildd = ({vendors}) => {
                   <thead class="thead-light">
                     <tr>
                       <th scope="col">Component</th>
-
                       <th scope="col">Select</th>
                       <th scope="col">Selection</th>
                       <th scope="col"> Price </th>
@@ -50,8 +70,15 @@ const PcBuildd = ({vendors}) => {
                         <a> CPU </a>
                       </td>
                       <td>
-                        {" "}
-                        <a href=""> Select Cpu </a>{" "}
+                       
+        <select className="combobox">
+          <option value={null} selected>Select a CPU</option>
+          {
+            vendorProducts.map(product => {
+              return <option value={product._id} key={product._id}>{product.name}</option>
+            })
+          }
+        </select>
                       </td>
                       <td> </td>
                       <td> </td>

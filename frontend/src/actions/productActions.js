@@ -16,10 +16,13 @@ import {
   UPDATE_PRODUCT_REQUEST,
   UPDATE_PRODUCT_SUCCESS,
   UPDATE_PRODUCT_FAIL,
-  UPDATE_PRODUCT_RESET,
+ 
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
   PRODUCT_DETAILS_FAIL,
+  SELECT_ALL_PRODUCT_REQUEST,
+  SELECT_ALL_PRODUCT_SUCCESS,
+  SELECT_ALL_PRODUCT_FAIL,
   CLEAR_ERRORS,
 } from "../constants/productConstant";
 
@@ -50,7 +53,6 @@ export const getProducts =
   };
 
 // Product detail function
-
 export const getProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
@@ -171,6 +173,29 @@ export const updateProduct = (id, productData) => async (dispatch) => { //passin
     });
   }
 };
+
+//action for getting all products for Pc build
+
+export const allProducts = () => async (dispatch) => {
+  try {
+
+      dispatch({ type: SELECT_ALL_PRODUCT_REQUEST });
+
+      const { data } = await axios.get('/api/v1/admin/products')
+
+      dispatch({
+          type: SELECT_ALL_PRODUCT_SUCCESS,
+          payload: data.products
+      })
+
+  } catch (error) {
+      dispatch({
+          type: SELECT_ALL_PRODUCT_FAIL,
+          payload: 'Error occured while loading products'
+      })
+  }
+}
+
 
 
 //Clear Errors

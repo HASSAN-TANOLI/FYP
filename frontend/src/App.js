@@ -24,7 +24,7 @@ import VendorLogin from "./components/vendor/VendorLogin";
 import RegisterVendor from "./components/vendor/RegisterVendor";
 import VendorProfile from "./components/vendor/VendorProfile";
 import UpdateVendorProfile from "./components/vendor/UpdateVendorProfile";
-import { loadVendor } from "./actions/vendorActions";
+import { loadVendor, allVendors } from "./actions/vendorActions";
 
 //Protected Routes
 import ProtectedRoute from "./components/route/ProtectedRoute";
@@ -69,6 +69,7 @@ const[stripeApiKey, setStripeApiKey] = useState('')
   useEffect(() => {
     store.dispatch(loadUser());
     store.dispatch(loadVendor());
+    store.dispatch(allVendors());
 
     async function getStripeApiKey() {
       const {data} = await axios.get('/api/v1/stripeapi');

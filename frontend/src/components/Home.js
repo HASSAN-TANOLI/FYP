@@ -5,8 +5,9 @@ import Loader from "./layout/Loader";
 import  Pagination from 'react-js-pagination';
 import {useDispatch, useSelector} from 'react-redux';
 import { useAlert } from 'react-alert';
-
+import {allVendors} from"../actions/vendorActions";
 import { getProducts } from '../actions/productActions';
+
 
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
@@ -41,6 +42,8 @@ const Home = ({match}) => {
    
   const {loading, products, error, productsCount, resPerPage, filteredProductCount } = useSelector(state => state.products);
 
+  const {vendors} = useSelector(state => state.allVendors);
+
   const keyword = match.params.keyword; //we are using param beacuse we are setting keywords in params in search component 
     
   useEffect(() => {
@@ -57,6 +60,7 @@ const Home = ({match}) => {
    
 
   },[dispatch, alert, error, keyword, currentPage, price, category]); //this is dependencies array
+
 
   function setCurrentPageNo(pageNumber){
     setCurrentPage(pageNumber);

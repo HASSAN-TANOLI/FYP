@@ -212,8 +212,8 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
 
 // Get all vendors   =>   /api/v1/admin/vendors
 exports.allVendors = catchAsyncErrors(async (req, res, next) => {
-  const vendors = await Vendor.find();
-
+  const vendors = await Vendor.find({});
+ 
   res.status(200).json({
       success: true,
       vendors
