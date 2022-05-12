@@ -13,9 +13,11 @@ const PcBuildd = ({}) => {
   const { products } = useSelector((state) => state.allProducts);
 
   const [vendorProducts, setVendorProducts] = useState([]);
+  const [total, setTotal] = useState(0)
   const [selectedVendor, setSelectedVendor] = useState({});
   const [cpus, setCpus] = useState([]);
   const [gpus, setGpus] = useState([]);
+  const[motherBoards, setMotherBoards] = useState([]);
   const [build, setBuild] = useState({});
 
   useEffect(() => {
@@ -37,19 +39,32 @@ const PcBuildd = ({}) => {
     const _gpus = vendorProducts.filter(
       (p) => p.category.toLowerCase() === "graphiccards"
     );
+
+    const _motherBoards = vendorProducts.filter( (p) => p.category.toLowerCase() === "motherboards");
+
+    
     setCpus(_cpus);
     setGpus(_gpus);
+    setMotherBoards(_motherBoards);
   }, [vendorProducts]);
 
   const resetProducts = () => {
     setBuild({});
+    setCpus([]);
     setVendorProducts([]);
     setGpus([]);
-    setGpus([]);
+    setMotherBoards([]);
   };
 
   useEffect(() => {
     console.log("build changed", build);
+
+
+    Object.keys(build).forEach(key => {
+      setTotal(
+        total + build[key].price
+      )
+    })
   }, [build]);
 
   return (
@@ -128,11 +143,32 @@ const PcBuildd = ({}) => {
                     <tr>
                       <td>MOTHERBOARD</td>
                       <td>
-                        {" "}
-                        <a href=""> Select Motherboard </a>{" "}
+                        <select
+                          className="combobox"
+                          onChange={(e) =>
+                            setBuild({
+                              ...build,
+                              motherBoards: JSON.parse(e.target.value),
+                            })
+                          }
+                        >
+                          <option value={null} selected>
+                            Select a Motherboard
+                          </option>
+                          {motherBoards.map((product) => {
+                            return (
+                              <option
+                                key={product._id}
+                                value={JSON.stringify(product)}
+                              >
+                                {product.name}
+                              </option>
+                            );
+                          })}
+                        </select>
                       </td>
-                      <td> </td>
-                      <td> </td>
+                      <td>{build?.motherBoards?.name}</td>
+                      <td>{build?.motherBoards?.price}</td>
                       <td>
                         {" "}
                         <a href="">
@@ -180,21 +216,31 @@ const PcBuildd = ({}) => {
                       <td> GRAPHIC CARD </td>
                       <td>
                         {" "}
-                        <select className="combobox">
+                        <select className="combobox"
+                          onChange=
+                          {(e) =>
+                            setBuild({
+                              ...build,
+                              graphiccards: JSON.parse(e.target.value),
+                            })
+                          } >
                           <option value={null} selected>
                             Select a GPU
                           </option>
                           {gpus.map((product) => {
                             return (
-                              <option key={product._id} value={product._id}>
+                              <option
+                                key={product._id}
+                                value={JSON.stringify(product)}
+                              >
                                 {product.name}
                               </option>
                             );
                           })}
                         </select>
                       </td>
-                      <td> </td>
-                      <td> </td>
+                      <td>{build?.graphiccards?.name}</td>
+                      <td>{build?.graphiccards?.price}</td>
                       <td>
                         {" "}
                         <a href="">
@@ -260,7 +306,7 @@ const PcBuildd = ({}) => {
               </div>
               <br></br>
               <br></br>
-              <label class="totalAmount">Total Amount: </label>
+              <label class="totalAmount">Total Amount:  {total}</label>
               <br></br>
             </div>
           </div>

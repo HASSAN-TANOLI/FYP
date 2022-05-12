@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import MetaData from "../layout/MetaData";
 import Loader from "../layout/Loader";
 import Sidebar from "./Sidebar";
@@ -10,7 +10,17 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
+  const { vendor} = useSelector(state => state.vendor)
   const { products } = useSelector((state) => state.products);
+
+  const [vendorProducts, setVendorProducts] = useState([]);
+
+  useEffect(() => {
+    const _products = products.filter(p => p.userId === vendor._id);
+    console.log(products)
+    setVendorProducts(_products);
+  },[products])
+ 
 
   // let outOfStock = 0;
   // products.forEach((product) => {
@@ -50,7 +60,7 @@ const Dashboard = () => {
                 <div className="card-body">
                   <div className="text-center card-font-size">
                     Products
-                    <br /> <b>{products && products.length}</b>
+                    <br /> <b>{vendorProducts && vendorProducts.length}</b>
                   </div>
                 </div>
                 <Link
