@@ -148,23 +148,24 @@ export const updateVendorProfile = (vendorData) => async (dispatch) => {
 // Get all Vendors
 export const allVendors = () => async (dispatch) => {
   try {
+    console.log("calling all vendors");
+    dispatch({ type: ALL_VENDORS_REQUEST });
+    console.log("helo");
+    const req = await axios.get("/api/v1/admin/vendors");
+    console.log("data got", req);
 
-      dispatch({ type: ALL_VENDORS_REQUEST })
-
-      const { data } = await axios.get('/api/v1/admin/vendors')
-
-      dispatch({
-          type: ALL_VENDORS_SUCCESS,
-          payload: data.vendors
-      })
-
+    dispatch({
+      type: ALL_VENDORS_SUCCESS,
+      payload: req.data.vendors,
+    });
   } catch (error) {
-      dispatch({
-          type: ALL_VENDORS_FAIL,
-          payload: error.response.data.message
-      })
+    console.log("catch error");
+    dispatch({
+      type: ALL_VENDORS_FAIL,
+      payload: error.response.data.message,
+    });
   }
-}
+};
 
 //Clear Errors
 

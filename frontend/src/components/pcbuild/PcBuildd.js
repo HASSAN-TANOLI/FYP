@@ -1,50 +1,76 @@
+import React, { Fragment, useEffect, useState } from "react";
+import { allVendors } from "../../actions/vendorActions";
+import { allProducts } from "../../actions/productActions";
 
-import React, { Fragment, useEffect, useState } from 'react'
-import {allVendors} from "../../actions/vendorActions";
-import {allProducts} from "../../actions/productActions";
-
-import { useAlert } from 'react-alert'
-import { useDispatch, useSelector } from 'react-redux'
-
+import { useAlert } from "react-alert";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./pcBuildd.css";
 
 const PcBuildd = ({}) => {
-
   const dispatch = useDispatch();
-  const {vendors} = useSelector(state => state.allVendors);
-  const {products} = useSelector(state => state.allProducts);
+  const { vendors } = useSelector((state) => state.allVendors);
+  const { products } = useSelector((state) => state.allProducts);
 
   const [vendorProducts, setVendorProducts] = useState([]);
   const [selectedVendor, setSelectedVendor] = useState({});
+  const [cpus, setCpus] = useState([]);
+  const [gpus, setGpus] = useState([]);
   const [build, setBuild] = useState({});
-
 
   useEffect(() => {
     dispatch(allProducts());
-  })
-
+  }, []);
 
   useEffect(() => {
-    console.log('selected Vendor', selectedVendor);
-    
+    console.log("selected Vendor", selectedVendor);
+    resetProducts();
     console.log(products);
-    const _products = products.filter(p => p?.userId === selectedVendor);
+    const _products = products.filter((p) => p?.userId === selectedVendor);
     setVendorProducts([..._products]);
-  },[selectedVendor])
+  }, [selectedVendor]);
+
+  useEffect(() => {
+    const _cpus = vendorProducts.filter(
+      (p) => p.category.toLowerCase() === "cpu"
+    );
+    const _gpus = vendorProducts.filter(
+      (p) => p.category.toLowerCase() === "graphiccards"
+    );
+    setCpus(_cpus);
+    setGpus(_gpus);
+  }, [vendorProducts]);
+
+  const resetProducts = () => {
+    setBuild({});
+    setVendorProducts([]);
+    setGpus([]);
+    setGpus([]);
+  };
+
+  useEffect(() => {
+    console.log("build changed", build);
+  }, [build]);
 
   return (
     <Fragment>
       <div class="container">
         <label>Select a Store: </label>
 
-        <select className="combobox" onChange={e => setSelectedVendor(e.target.value)}>
-          <option value={null} selected>Select a vandor</option>
-          {
-            vendors.map(vendor => {
-              return <option value={vendor._id} key={vendor._id} >{vendor.shopname}</option>
-            })
-          }
+        <select
+          className="combobox"
+          onChange={(e) => setSelectedVendor(e.target.value)}
+        >
+          <option value={null} selected>
+            Select a vandor
+          </option>
+          {vendors.map((vendor) => {
+            return (
+              <option value={vendor._id} key={vendor._id}>
+                {vendor.shopname}
+              </option>
+            );
+          })}
         </select>
 
         <div class="row">
@@ -70,25 +96,33 @@ const PcBuildd = ({}) => {
                         <a> CPU </a>
                       </td>
                       <td>
-                       
-        <select className="combobox">
-          <option value={null} selected>Select a CPU</option>
-          {
-            vendorProducts.map(product => {
-              return <option value={product._id} key={product._id}>{product.name}</option>
-            })
-          }
-        </select>
+                        <select
+                          className="combobox"
+                          onChange={(e) =>
+                            setBuild({
+                              ...build,
+                              cpu: JSON.parse(e.target.value),
+                            })
+                          }
+                        >
+                          <option value={null} selected>
+                            Select a CPU
+                          </option>
+                          {cpus.map((product) => {
+                            return (
+                              <option
+                                key={product._id}
+                                value={JSON.stringify(product)}
+                              >
+                                {product.name}
+                              </option>
+                            );
+                          })}
+                        </select>
                       </td>
+                      <td>{build?.cpu?.name}</td>
+                      <td>{build?.cpu?.price}</td>
                       <td> </td>
-                      <td> </td>
-                      <td>
-                        {" "}
-                        <a href="">
-                          {" "}
-                          <i class="fa fa-trash" aria-hidden="true"></i>{" "}
-                        </a>{" "}
-                      </td>
                     </tr>
 
                     <tr>
@@ -146,7 +180,18 @@ const PcBuildd = ({}) => {
                       <td> GRAPHIC CARD </td>
                       <td>
                         {" "}
-                        <a href=""> Select Graphic Card </a>{" "}
+                        <select className="combobox">
+                          <option value={null} selected>
+                            Select a GPU
+                          </option>
+                          {gpus.map((product) => {
+                            return (
+                              <option key={product._id} value={product._id}>
+                                {product.name}
+                              </option>
+                            );
+                          })}
+                        </select>
                       </td>
                       <td> </td>
                       <td> </td>
@@ -215,8 +260,8 @@ const PcBuildd = ({}) => {
               </div>
               <br></br>
               <br></br>
-              <label class="totalAmount">Total Amount: </label><br></br>
-              
+              <label class="totalAmount">Total Amount: </label>
+              <br></br>
             </div>
           </div>
         </div>

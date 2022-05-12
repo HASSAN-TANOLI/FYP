@@ -1,5 +1,10 @@
 import axios from "axios";
-import { ADD_TO_CART, REMOVE_ITEM_CART, SAVE_SHIPPING_INFO } from "../constants/cartConstants";
+import {
+  ADD_TO_CART,
+  REMOVE_ITEM_CART,
+  SAVE_SHIPPING_INFO,
+  RESET_CART,
+} from "../constants/cartConstants";
 
 export const addItemToCart = (id, quantity) => async (dispatch, getState) => {
   //getState is to get the current state
@@ -33,12 +38,18 @@ export const removeItemFromCart = (id) => async (dispatch, getState) => {
 };
 
 export const saveShippingInfo = (data) => async (dispatch) => {
-
   dispatch({
-      type: SAVE_SHIPPING_INFO,
-      payload: data
-  })
+    type: SAVE_SHIPPING_INFO,
+    payload: data,
+  });
 
-  localStorage.setItem('shippingInfo', JSON.stringify(data))
+  localStorage.setItem("shippingInfo", JSON.stringify(data));
+};
 
-}
+export const resetCart = () => async (dispatch) => {
+  localStorage.removeItem("cartItems");
+  localStorage.removeItem("shoppingInfo");
+  dispatch({
+    type: RESET_CART,
+  });
+};

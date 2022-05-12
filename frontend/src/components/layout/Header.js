@@ -4,12 +4,13 @@ import { Route, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import { logoutUser } from "../../actions/userActions";
+import { resetCart } from "../../actions/cartActions";
 import { logoutVendor } from "../../actions/vendorActions";
 
 import Search from "./Search";
 
 import "../../App.css";
-import './header.css'
+import "./header.css";
 
 const Header = () => {
   const alert = useAlert();
@@ -20,6 +21,7 @@ const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
 
   const logoutHandler = () => {
+    dispatch(resetCart());
     dispatch(logoutUser());
     dispatch(logoutVendor());
     alert.success("Logged out successfully");
@@ -123,7 +125,6 @@ const Header = () => {
               <div className="dropdown-menu" aria-labelledby="dropDownMenuLink">
                 {vendor && vendor.role != "vendor" ? (
                   <Link className="dropdown-item" to="orders/user">
-                    
                     orders
                   </Link>
                 ) : (
