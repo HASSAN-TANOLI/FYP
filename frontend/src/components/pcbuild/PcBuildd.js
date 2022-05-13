@@ -6,6 +6,7 @@ import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 
 import "./pcBuildd.css";
+import { set } from "express/lib/application";
 
 const PcBuildd = ({}) => {
   const dispatch = useDispatch();
@@ -18,6 +19,11 @@ const PcBuildd = ({}) => {
   const [cpus, setCpus] = useState([]);
   const [gpus, setGpus] = useState([]);
   const[motherBoards, setMotherBoards] = useState([]);
+  const[rams, setRams] = useState([]);
+  const[storages, setStorages] = useState([]);
+  const[powerSupplys, setPowerSupplys] = useState([]);
+  const[cases, setCases] = useState([]);
+  const[monitors, setMonitors] = useState([]);
   const [build, setBuild] = useState({});
 
   useEffect(() => {
@@ -40,12 +46,33 @@ const PcBuildd = ({}) => {
       (p) => p.category.toLowerCase() === "graphiccards"
     );
 
-    const _motherBoards = vendorProducts.filter( (p) => p.category.toLowerCase() === "motherboards");
+    const _motherBoards = vendorProducts.filter( 
+      (p) => p.category.toLowerCase() === "motherboards");
+
+    const _rams = vendorProducts.filter(
+      (p) => p.category.toLowerCase() === "ram");
+
+    const _storages = vendorProducts.filter(
+      (p) => p.category.toLowerCase() === "harddisks");
+
+    const _powerSupplys = vendorProducts.filter(
+      (p) => p.category.toLowerCase() === "powersupply");
+
+    const _cases = vendorProducts.filter(
+      (p) => p.category.toLowerCase() === "case");
+
+    const _monitors = vendorProducts.filter(
+      (p) => p.category.toLowerCase() === "monitor");
 
     
     setCpus(_cpus);
     setGpus(_gpus);
     setMotherBoards(_motherBoards);
+    setRams(_rams);
+    setStorages(_storages);
+    setPowerSupplys(_powerSupplys);
+    setCases(_cases);
+    setMonitors(_monitors);
   }, [vendorProducts]);
 
   const resetProducts = () => {
@@ -54,6 +81,11 @@ const PcBuildd = ({}) => {
     setVendorProducts([]);
     setGpus([]);
     setMotherBoards([]);
+    setRams([]);
+    setStorages([]);
+    setPowerSupplys([]);
+    setCases([]);
+    setMonitors([]);
   };
 
   useEffect(() => {
@@ -70,14 +102,14 @@ const PcBuildd = ({}) => {
   return (
     <Fragment>
       <div class="container">
-        <label>Select a Store: </label>
+        <label>Choose a Store: </label>
 
         <select
-          className="combobox"
+          className="combobox1"
           onChange={(e) => setSelectedVendor(e.target.value)}
         >
           <option value={null} selected>
-            Select a vandor
+            Select a store
           </option>
           {vendors.map((vendor) => {
             return (
@@ -180,12 +212,34 @@ const PcBuildd = ({}) => {
 
                     <tr>
                       <td>RAM</td>
+
                       <td>
-                        {" "}
-                        <a href=""> Select Ram </a>{" "}
-                      </td>
-                      <td> </td>
-                      <td> </td>
+                      <select
+                          className="combobox"
+                          onChange={(e) =>
+                            setBuild({
+                              ...build,
+                              rams: JSON.parse(e.target.value),
+                            })
+                          }
+                        >
+                          <option value={null} selected>
+                            Select a Ram
+                          </option>
+                          {rams.map((product) => {
+                            return (
+                              <option
+                                key={product._id}
+                                value={JSON.stringify(product)}
+                              >
+                                {product.name}
+                              </option>
+                            );
+                          })}
+                        </select>
+                        </td>
+                        <td>{build?.rams?.name}</td>
+                      <td>{build?.rams?.price}</td>
                       <td>
                         {" "}
                         <a href="">
@@ -198,11 +252,32 @@ const PcBuildd = ({}) => {
                     <tr>
                       <td> STORAGE </td>
                       <td>
-                        {" "}
-                        <a href=""> Select Storage </a>{" "}
-                      </td>
-                      <td> </td>
-                      <td> </td>
+                      <select
+                          className="combobox"
+                          onChange={(e) =>
+                            setBuild({
+                              ...build,
+                              storages: JSON.parse(e.target.value),
+                            })
+                          }
+                        >
+                          <option value={null} selected>
+                            Select a Storage
+                          </option>
+                          {storages.map((product) => {
+                            return (
+                              <option
+                                key={product._id}
+                                value={JSON.stringify(product)}
+                              >
+                                {product.name}
+                              </option>
+                            );
+                          })}
+                        </select>
+                        </td>
+                        <td>{build?.storages?.name}</td>
+                      <td>{build?.storages?.price}</td>
                       <td>
                         {" "}
                         <a href="">
@@ -253,11 +328,32 @@ const PcBuildd = ({}) => {
                     <tr>
                       <td>POWER SUPPLY</td>
                       <td>
-                        {" "}
-                        <a href=""> Select Power Supply </a>{" "}
-                      </td>
-                      <td> </td>
-                      <td> </td>
+                      <select
+                          className="combobox"
+                          onChange={(e) =>
+                            setBuild({
+                              ...build,
+                              powerSupplys: JSON.parse(e.target.value),
+                            })
+                          }
+                        >
+                          <option value={null} selected>
+                            Select a PowerSupply
+                          </option>
+                          {powerSupplys.map((product) => {
+                            return (
+                              <option
+                                key={product._id}
+                                value={JSON.stringify(product)}
+                              >
+                                {product.name}
+                              </option>
+                            );
+                          })}
+                        </select>
+                        </td>
+                        <td>{build?.powerSupplys?.name}</td>
+                      <td>{build?.powerSupplys?.price}</td>
                       <td>
                         {" "}
                         <a href="">
@@ -270,11 +366,32 @@ const PcBuildd = ({}) => {
                     <tr>
                       <td>CASE</td>
                       <td>
-                        {" "}
-                        <a href=""> Select Casing </a>{" "}
-                      </td>
-                      <td> </td>
-                      <td> </td>
+                      <select
+                          className="combobox"
+                          onChange={(e) =>
+                            setBuild({
+                              ...build,
+                              cases: JSON.parse(e.target.value),
+                            })
+                          }
+                        >
+                          <option value={null} selected>
+                            Select a Casing
+                          </option>
+                          {cases.map((product) => {
+                            return (
+                              <option
+                                key={product._id}
+                                value={JSON.stringify(product)}
+                              >
+                                {product.name}
+                              </option>
+                            );
+                          })}
+                        </select>
+                        </td>
+                        <td>{build?.cases?.name}</td>
+                      <td>{build?.cases?.price}</td>
                       <td>
                         {" "}
                         <a href="">
@@ -287,11 +404,32 @@ const PcBuildd = ({}) => {
                     <tr>
                       <td> MONITOR </td>
                       <td>
-                        {" "}
-                        <a href=""> Select Monitor </a>{" "}
-                      </td>
-                      <td> </td>
-                      <td> </td>
+                      <select
+                          className="combobox"
+                          onChange={(e) =>
+                            setBuild({
+                              ...build,
+                              monitors: JSON.parse(e.target.value),
+                            })
+                          }
+                        >
+                          <option value={null} selected>
+                            Select a Moniter
+                          </option>
+                          {monitors.map((product) => {
+                            return (
+                              <option
+                                key={product._id}
+                                value={JSON.stringify(product)}
+                              >
+                                {product.name}
+                              </option>
+                            );
+                          })}
+                        </select>
+                        </td>
+                        <td>{build?.monitors?.name}</td>
+                      <td>{build?.monitors?.price}</td>
 
                       <td>
                         {" "}

@@ -37,6 +37,7 @@ import PcBuildd from "./components/pcbuild/PcBuildd";
 import Dashboard from "./components/admin/Dashboard";
 import ProductsList from "./components/admin/ProductList";
 import NewProduct from "./components/admin/NewProduct";
+import UpdateProduct from "./components/admin/UpdateProduct";
 
 
 import store from "./store";
@@ -53,7 +54,7 @@ import OrdersList from "./components/admin/OrdersList";
 
 
 
-import UpdateProduct from "./components/admin/UpdateProduct";
+
 
 import axios from "axios";
 
@@ -150,11 +151,11 @@ const[stripeApiKey, setStripeApiKey] = useState('')
           exact
         />
 
-<ProtectedRoutes
+        <ProtectedRoutes
           path="/admin/product/:id"
           isAdmin={true}
           component={UpdateProduct}
-          exact
+          
         />
 
         <Route path="/pcbuildd" component={PcBuildd} exact />

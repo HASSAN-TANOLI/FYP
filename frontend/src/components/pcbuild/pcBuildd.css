@@ -3,7 +3,8 @@
 
 
 .container {
-    margin-top: 100px
+    margin-top: 100px;
+    
 }
 
 .card {
@@ -126,9 +127,10 @@ th {
 
 .combobox{
     margin-left: 10px;
+    width: 130px;
     position: relative;
     display: inline-block;
-    width: 10%;
+    
   
   
 }
@@ -139,4 +141,12 @@ th {
     
     margin-left: 600px;
 
+}
+
+
+.combobox1{
+    margin-left: 10px;
+    width: 130px;
+    position: relative;
+    display: inline-block;
 }
