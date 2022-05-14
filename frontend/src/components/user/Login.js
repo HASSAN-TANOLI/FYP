@@ -24,9 +24,11 @@ const Login = ({ history, location }) => {
   useEffect(() => {
     if (isAuthenticatedUser) {
       history.push(redirect);
+      alert.success("You are now logged in");
     }
 
     if (error) {
+  
       alert.error(error);
       dispatch(clearErrors());
     }

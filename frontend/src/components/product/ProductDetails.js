@@ -1,21 +1,31 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Carousel } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetails, clearErrors } from "../../actions/productActions";
+import { getProductDetails, clearErrors, newReview } from "../../actions/productActions";
 import { addItemToCart } from "../../actions/cartActions";
 import { useAlert } from "react-alert";
 import Loader from "../layout/Loader";
 import MetaData from "../layout/MetaData";
+import { NEW_REVIEW_RESET } from "../../constants/productConstant";
+import ListReviews from "../review/ListReviews";
+
 
 const ProductDetails = ({ match }) => {
   //match is a prop that is passed from the router it is just like req.params.id
 
   const [quantity, setQuantity] = useState(1);
+  const [rating, setRating] = useState(0);
+  const[comment, setComment] = useState('');
+
   const dispatch = useDispatch();
   const alert = useAlert();
   const { loading, error, product } = useSelector(
     (state) => state.productDetails
   );
+
+  const {error: reviewError, success} = useSelector(state => state.newReview);
+
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(getProductDetails(match.params.id));
@@ -24,7 +34,19 @@ const ProductDetails = ({ match }) => {
       alert.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, alert, error, match.params.id]); //if any thing change it will then call the useEffect and run the code inside it
+
+    
+    if (reviewError) {
+      alert.error(reviewError);
+      dispatch(clearErrors());
+    }
+
+    if (success) {
+      alert.success(success);
+      dispatch({type: NEW_REVIEW_RESET});
+    }
+
+  }, [dispatch, alert, error, reviewError, match.params.id, success]); //if any thing change it will then call the useEffect and run the code inside it
 
   const addToCart = () => {
     dispatch(addItemToCart(match.params.id, quantity));
@@ -48,6 +70,54 @@ const ProductDetails = ({ match }) => {
     const qty = count.valueAsNumber - 1; //if its less then stock then it will add more
     setQuantity(qty);
   };
+
+  function setUserRatings() {   
+    const stars = document.querySelectorAll(".star"); //selecting all stars
+
+    stars.forEach((star, index) => { 
+      star.starValue = index + 1; //storing the value of the each star in the starValue property
+
+      ["click", "mouseover", "mouseout"].forEach(function (e) { //adding multiple event listeners to each star
+        star.addEventListener(e, showRatings);
+      });
+    });
+
+    function showRatings(e) {
+      stars.forEach((star, index) => {
+        if (e.type === "click") {
+          if (index < this.starValue) {
+            star.classList.add("orange");
+
+            setRating(this.starValue);
+          } else {
+            star.classList.remove("orange");
+          }
+        }
+
+        if (e.type === "mouseover") {
+          if (index < this.starValue) {
+            star.classList.add("yellow");
+          } else {
+            star.classList.remove("yellow");
+          }
+        }
+
+        if (e.type === "mouseout") {
+          star.classList.remove("yellow");
+        }
+      });
+    }
+  }
+
+  const reviewHandler = () => {
+    const formData = new FormData();
+
+    formData.set('rating', rating);
+    formData.set('comment', comment);
+    formData.set('productId', match.params.id);
+
+    dispatch(newReview(formData));
+}
 
   return (
     <Fragment>
@@ -81,7 +151,7 @@ const ProductDetails = ({ match }) => {
               <div className="rating-outer">
                 <div className="rating-inner"></div>
               </div>
-              <span id="no_of_reviews">({product.noOfReviews} Reviews)</span>
+              <span id="no_of_reviews">({product.numOfReviews}Reviews)</span>
 
               <hr />
 
@@ -132,15 +202,22 @@ const ProductDetails = ({ match }) => {
                 Sold by: <strong>{product.vendor}</strong>
               </p>
 
-              <button
-                id="review_btn"
-                type="button"
-                className="btn btn-primary mt-4"
-                data-toggle="modal"
-                data-target="#ratingModal"
-              >
-                Submit Your Review
-              </button>
+              {user ? (
+                <button
+                  id="review_btn"
+                  type="button"
+                  className="btn btn-primary mt-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#ratingModal"
+                  onClick={setUserRatings}
+                >
+                  Submit Your Review
+                </button>
+              ) : (
+                <div className="alert alert-danger mt-5" type="alert">
+                  Login to post your review.
+                </div>
+              )}
 
               <div className="row mt-2 mb-5">
                 <div className="rating w-50">
@@ -161,7 +238,7 @@ const ProductDetails = ({ match }) => {
                           <button
                             type="button"
                             className="close"
-                            data-dismiss="modal"
+                            data-bs-dismiss="modal"
                             aria-label="Close"
                           >
                             <span aria-hidden="true">&times;</span>
@@ -190,11 +267,14 @@ const ProductDetails = ({ match }) => {
                             name="review"
                             id="review"
                             className="form-control mt-3"
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
                           ></textarea>
 
                           <button
                             className="btn my-3 float-right review-btn px-4 text-white"
-                            data-dismiss="modal"
+                            onClick={reviewHandler}
+                            data-bs-dismiss="modal"
                             aria-label="Close"
                           >
                             Submit
@@ -207,6 +287,9 @@ const ProductDetails = ({ match }) => {
               </div>
             </div>
           </div>
+          {product.reviews && product.reviews.length > 0 && (
+                        <ListReviews reviews={product.reviews} />
+                    )}
         </Fragment>
       )}
     </Fragment>

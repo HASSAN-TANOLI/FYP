@@ -67,6 +67,7 @@ export const myOrders = () => async (dispatch) => {
 // Get order details
 export const getOrderDetails = (id) => async (dispatch) => {
     try {
+        
 
         dispatch({ type: ORDER_DETAILS_REQUEST });
 

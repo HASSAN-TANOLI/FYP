@@ -38,7 +38,7 @@ import Dashboard from "./components/admin/Dashboard";
 import ProductsList from "./components/admin/ProductList";
 import NewProduct from "./components/admin/NewProduct";
 import UpdateProduct from "./components/admin/UpdateProduct";
-
+ 
 
 import store from "./store";
 
@@ -145,7 +145,7 @@ const[stripeApiKey, setStripeApiKey] = useState('')
         />
 
         <ProtectedRoutes
-          path="/admin/product/new"
+          path="/admin/product"
           isAdmin={true}
           component={NewProduct}
           exact

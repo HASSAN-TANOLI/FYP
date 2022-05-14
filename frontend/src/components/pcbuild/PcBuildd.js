@@ -6,7 +6,7 @@ import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 
 import "./pcBuildd.css";
-import { set } from "express/lib/application";
+
 
 const PcBuildd = ({}) => {
   const dispatch = useDispatch();
@@ -34,8 +34,8 @@ const PcBuildd = ({}) => {
     console.log("selected Vendor", selectedVendor);
     resetProducts();
     console.log(products);
-    const _products = products.filter((p) => p?.userId === selectedVendor);
-    setVendorProducts([..._products]);
+    const _products = products.filter((p) => p?.userId === selectedVendor); // searching for products of selected vendor because userId is vendor id which is given to every product
+    setVendorProducts([..._products]); // setting products of selected vendor
   }, [selectedVendor]);
 
   useEffect(() => {

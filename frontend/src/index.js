@@ -6,16 +6,12 @@ import App from "./App";
 import { Provider } from "react-redux";
 import store from "./store";
 
-import { transitions, positions, Provider as AlertProvider } from "react-alert";
+import { positions, transitions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 
-// optional configuration
 const options = {
-  // you can also just use 'bottom center'
-  position: positions.BOTTOM_CENTER,
   timeout: 5000,
-  offset: "30px",
-  // you can also just use 'scale'
+  position: positions.BOTTOM_CENTER,
   transition: transitions.SCALE,
 };
 
