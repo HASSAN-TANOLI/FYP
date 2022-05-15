@@ -5,10 +5,11 @@ const bodyParser = require('body-parser')
 const cloudinary = require('cloudinary')
 const fileUpload = require('express-fileupload')
 const dotenv = require('dotenv');
+const path = require('path');
 
 const errorMiddleware = require('./middlewares/errors')
 // setting up config file
-
+ 
 dotenv.config({path: 'backend/config/config.env'})
 
  app.use(express.json()); 
@@ -33,6 +34,8 @@ app.use('/api/v1', authVendor)
 
 app.use('/api/v1', order)
 app.use('/api/v1', payment)
+
+
 
 //Middleware to handle errors
 app.use(errorMiddleware);

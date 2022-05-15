@@ -22,18 +22,24 @@ const UpdateProduct = ({ match, history }) => {
     const [imagesPreview, setImagesPreview] = useState([])
 
     const categories = [
-        'Electronics',
-        'Cameras',
-        'Laptops',
-        'Accessories',
-        'Headphones',
-        'Food',
-        "Books",
-        'Clothes/Shoes',
-        'Beauty/Health',
-        'Sports',
-        'Outdoor',
-        'Home'
+        "Electronics",
+        "Laptops",
+        "Mobiles",
+        "Computers",
+        "Accessories",
+        "MotherBoards",
+        "Processors",
+        "GraphicCards",
+        "Ram",
+        "HardDisks",
+        "SSD",
+        "KeyBoards",
+        "Mouse",
+        "Headphones",
+        "Cpu",
+        "PowerSupply",
+        "Case",
+        "Monitor",
     ]
 
     const alert = useAlert();
