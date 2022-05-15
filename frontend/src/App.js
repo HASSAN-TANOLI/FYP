@@ -33,6 +33,7 @@ import ProtectedRoutes from "./components/route/ProtectedRoutes";
 //Build Pc Related Routes
 import PcBuildd from "./components/pcbuild/PcBuildd";
 
+
 //admin or vendor realted routes
 import Dashboard from "./components/admin/Dashboard";
 import ProductsList from "./components/admin/ProductList";
@@ -159,6 +160,7 @@ const[stripeApiKey, setStripeApiKey] = useState('')
         />
 
         <Route path="/pcbuildd" component={PcBuildd} exact />
+        
         <Footer />
       </div>
     </Router>

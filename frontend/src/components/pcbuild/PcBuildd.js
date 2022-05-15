@@ -4,9 +4,10 @@ import { allProducts } from "../../actions/productActions";
 
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
+    
 import "./pcBuildd.css";
-
 
 const PcBuildd = ({}) => {
   const dispatch = useDispatch();
@@ -14,16 +15,16 @@ const PcBuildd = ({}) => {
   const { products } = useSelector((state) => state.allProducts);
 
   const [vendorProducts, setVendorProducts] = useState([]);
-  const [total, setTotal] = useState(0)
+  const [total, setTotal] = useState(0);
   const [selectedVendor, setSelectedVendor] = useState({});
   const [cpus, setCpus] = useState([]);
   const [gpus, setGpus] = useState([]);
-  const[motherBoards, setMotherBoards] = useState([]);
-  const[rams, setRams] = useState([]);
-  const[storages, setStorages] = useState([]);
-  const[powerSupplys, setPowerSupplys] = useState([]);
-  const[cases, setCases] = useState([]);
-  const[monitors, setMonitors] = useState([]);
+  const [motherBoards, setMotherBoards] = useState([]);
+  const [rams, setRams] = useState([]);
+  const [storages, setStorages] = useState([]);
+  const [powerSupplys, setPowerSupplys] = useState([]);
+  const [cases, setCases] = useState([]);
+  const [monitors, setMonitors] = useState([]);
   const [build, setBuild] = useState({});
 
   useEffect(() => {
@@ -46,25 +47,30 @@ const PcBuildd = ({}) => {
       (p) => p.category.toLowerCase() === "graphiccards"
     );
 
-    const _motherBoards = vendorProducts.filter( 
-      (p) => p.category.toLowerCase() === "motherboards");
+    const _motherBoards = vendorProducts.filter(
+      (p) => p.category.toLowerCase() === "motherboards"
+    );
 
     const _rams = vendorProducts.filter(
-      (p) => p.category.toLowerCase() === "ram");
+      (p) => p.category.toLowerCase() === "ram"
+    );
 
     const _storages = vendorProducts.filter(
-      (p) => p.category.toLowerCase() === "harddisks");
+      (p) => p.category.toLowerCase() === "harddisks"
+    );
 
     const _powerSupplys = vendorProducts.filter(
-      (p) => p.category.toLowerCase() === "powersupply");
+      (p) => p.category.toLowerCase() === "powersupply"
+    );
 
     const _cases = vendorProducts.filter(
-      (p) => p.category.toLowerCase() === "case");
+      (p) => p.category.toLowerCase() === "case"
+    );
 
     const _monitors = vendorProducts.filter(
-      (p) => p.category.toLowerCase() === "monitor");
+      (p) => p.category.toLowerCase() === "monitor"
+    );
 
-    
     setCpus(_cpus);
     setGpus(_gpus);
     setMotherBoards(_motherBoards);
@@ -91,12 +97,9 @@ const PcBuildd = ({}) => {
   useEffect(() => {
     console.log("build changed", build);
 
-
-    Object.keys(build).forEach(key => {
-      setTotal(
-        total + build[key].price
-      )
-    })
+    Object.keys(build).forEach((key) => {
+      setTotal(total + build[key].price);
+    });
   }, [build]);
 
   return (
@@ -214,7 +217,7 @@ const PcBuildd = ({}) => {
                       <td>RAM</td>
 
                       <td>
-                      <select
+                        <select
                           className="combobox"
                           onChange={(e) =>
                             setBuild({
@@ -237,8 +240,8 @@ const PcBuildd = ({}) => {
                             );
                           })}
                         </select>
-                        </td>
-                        <td>{build?.rams?.name}</td>
+                      </td>
+                      <td>{build?.rams?.name}</td>
                       <td>{build?.rams?.price}</td>
                       <td>
                         {" "}
@@ -252,7 +255,7 @@ const PcBuildd = ({}) => {
                     <tr>
                       <td> STORAGE </td>
                       <td>
-                      <select
+                        <select
                           className="combobox"
                           onChange={(e) =>
                             setBuild({
@@ -275,8 +278,8 @@ const PcBuildd = ({}) => {
                             );
                           })}
                         </select>
-                        </td>
-                        <td>{build?.storages?.name}</td>
+                      </td>
+                      <td>{build?.storages?.name}</td>
                       <td>{build?.storages?.price}</td>
                       <td>
                         {" "}
@@ -291,14 +294,15 @@ const PcBuildd = ({}) => {
                       <td> GRAPHIC CARD </td>
                       <td>
                         {" "}
-                        <select className="combobox"
-                          onChange=
-                          {(e) =>
+                        <select
+                          className="combobox"
+                          onChange={(e) =>
                             setBuild({
                               ...build,
                               graphiccards: JSON.parse(e.target.value),
                             })
-                          } >
+                          }
+                        >
                           <option value={null} selected>
                             Select a GPU
                           </option>
@@ -328,7 +332,7 @@ const PcBuildd = ({}) => {
                     <tr>
                       <td>POWER SUPPLY</td>
                       <td>
-                      <select
+                        <select
                           className="combobox"
                           onChange={(e) =>
                             setBuild({
@@ -351,8 +355,8 @@ const PcBuildd = ({}) => {
                             );
                           })}
                         </select>
-                        </td>
-                        <td>{build?.powerSupplys?.name}</td>
+                      </td>
+                      <td>{build?.powerSupplys?.name}</td>
                       <td>{build?.powerSupplys?.price}</td>
                       <td>
                         {" "}
@@ -366,7 +370,7 @@ const PcBuildd = ({}) => {
                     <tr>
                       <td>CASE</td>
                       <td>
-                      <select
+                        <select
                           className="combobox"
                           onChange={(e) =>
                             setBuild({
@@ -389,8 +393,8 @@ const PcBuildd = ({}) => {
                             );
                           })}
                         </select>
-                        </td>
-                        <td>{build?.cases?.name}</td>
+                      </td>
+                      <td>{build?.cases?.name}</td>
                       <td>{build?.cases?.price}</td>
                       <td>
                         {" "}
@@ -404,7 +408,7 @@ const PcBuildd = ({}) => {
                     <tr>
                       <td> MONITOR </td>
                       <td>
-                      <select
+                        <select
                           className="combobox"
                           onChange={(e) =>
                             setBuild({
@@ -427,8 +431,8 @@ const PcBuildd = ({}) => {
                             );
                           })}
                         </select>
-                        </td>
-                        <td>{build?.monitors?.name}</td>
+                      </td>
+                      <td>{build?.monitors?.name}</td>
                       <td>{build?.monitors?.price}</td>
 
                       <td>
@@ -444,7 +448,11 @@ const PcBuildd = ({}) => {
               </div>
               <br></br>
               <br></br>
-              <label class="totalAmount">Total Amount:  {total}</label>
+              <label class="totalAmount">Total Amount: {total}</label>
+              <Link to="/soon">
+                <button type="button" className="proceed">Proceed</button>
+              </Link>
+
               <br></br>
             </div>
           </div>

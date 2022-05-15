@@ -148,8 +148,6 @@ const Header = () => {
           ) : (
             !loadingg &&  (
               
-              
-              
               <Link to="/loginvendor" className="btn mr-4" id="login_btn">
                 
                   Vendor Login 

@@ -17,7 +17,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const _products = products.filter(p => p.userId === vendor._id);
-    console.log(products)
+   
     setVendorProducts(_products);
   },[products])
  
