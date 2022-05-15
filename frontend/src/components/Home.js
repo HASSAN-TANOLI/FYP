@@ -21,21 +21,24 @@ const Home = ({match}) => {
   const [price, setPrice] = useState([1, 100000]);
   const [category, setCategory] = useState('');
   const categories = [
-         'Electronics',
-          'Laptops',
-          'Mobiles',
-          'Computers',
-          'Accessories',
-          'MotherBoards',
-          'Processors',
-          'GraphicCards',
-          'Ram',
-          'HardDisks',
-          'SSD',
-          'KeyBoards',
-          'Mouse',
-          'Headphones'
-  
+    "Electronics",
+    "Laptops",
+    "Mobiles",
+    "Computers",
+    "Accessories",
+    "MotherBoards",
+    "Processors",
+    "GraphicCards",
+    "Ram",
+    "HardDisks",
+    "SSD",
+    "KeyBoards",
+    "Mouse",
+    "Headphones",
+    "Cpu",
+    "PowerSupply",
+    "Case",
+    "Monitor",
   ]
   const alert = useAlert();
   const dispatch = useDispatch();

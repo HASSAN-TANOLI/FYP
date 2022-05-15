@@ -36,7 +36,7 @@ const Payment = ({ history }) => {
     useEffect(() => {
         if (error) {
             alert.error(error);
-            dispatch(clearErrors())   
+            dispatch(clearErrors)   
         }
        
 

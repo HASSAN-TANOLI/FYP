@@ -18,7 +18,7 @@ const NewPassword = ({ history, match }) => {
   useEffect(() => {
     if (error) {
       alert.error(error);
-      dispatch(clearErrors());
+      dispatch(clearErrors);
     }
 
     if (success) {

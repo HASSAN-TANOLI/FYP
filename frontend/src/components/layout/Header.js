@@ -33,7 +33,7 @@ const Header = () => {
         <div className="col-12 col-md-3">
           <div className="navbar-brand">
             <Link to="/">
-              <img className="image" src="/images/logo.png" />
+              <img className="image" src="/images/logo1.png" />
             </Link>
           </div>
         </div>
@@ -146,10 +146,16 @@ const Header = () => {
               </div>
             </div>
           ) : (
-            !loadingg && (
+            !loadingg &&  (
+              
+              
+              
               <Link to="/loginvendor" className="btn mr-4" id="login_btn">
-                Vendor Login
+                
+                  Vendor Login 
               </Link>
+              
+             
             )
           )}
         </div>

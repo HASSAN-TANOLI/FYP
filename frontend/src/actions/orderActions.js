@@ -110,7 +110,7 @@ export const allOrders = () => async (dispatch) => {
 
 
 // Clear Errors
-export const clearErrors = () => async (dispatch) => {
+export const clearErrors =  (dispatch) => {
   dispatch({
       type: CLEAR_ERRORS
   })

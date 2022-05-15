@@ -28,12 +28,12 @@ const ProductsList = ({ history }) => {
 
     if (error) {
       alert.error(error);
-      dispatch(clearErrors());
+      dispatch(clearErrors);
     }
 
     if (deleteError) {
       alert.error(deleteError);
-      dispatch(clearErrors());
+      dispatch(clearErrors);
     }
 
     if (isDeleted) {

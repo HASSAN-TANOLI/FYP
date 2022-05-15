@@ -30,7 +30,7 @@ const Login = ({ history, location }) => {
     if (error) {
   
       alert.error(error);
-      dispatch(clearErrors());
+      dispatch(clearErrors);
     }
   }, [dispatch, alert, isAuthenticatedUser, error, history]);
 

@@ -12,7 +12,7 @@ const Sidebar = () => {
             </Link>
           </li>
 
-          <li>
+          <li style={{position: 'relative'}}>
             <a
               href="#productSubmenu"
               data-bs-toggle="collapse"

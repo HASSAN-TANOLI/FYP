@@ -228,9 +228,11 @@ export const logoutUser = () => async (dispatch) => {
     });
   }
 };
-//Clear Errors
+// Clear Errors
 
-export const clearErrors = () => async (dispatch) => {
+
+export const clearErrors = (dispatch) => {
+  
   dispatch({
     type: CLEAR_ERRORS,
   });

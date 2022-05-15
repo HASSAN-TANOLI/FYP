@@ -15,11 +15,13 @@ module.exports = (err, req, res, next) => {
   }
 
   if(process.env.NODE_ENV === 'PRODUCTION') {
-    let error = {...err}
+    let error = {...err};
 
     error.message = err.message;
 
     // Wrong moongose Object ID error  // wrong id error
+
+    console.log("eccor =>", error);
     if (err.name === 'CastError') {
       const message = `Resource not found. invalid: ${err.path}`
       error = new ErrorHandler(message, 400)

@@ -93,7 +93,7 @@ const[stripeApiKey, setStripeApiKey] = useState('')
         <Route path="/cart" component={Cart} exact />
         <ProtectedRoute path="/shipping" component={Shipping} />
 
-        <ProtectedRoute path="/order/confirm" component={ConfirmOrder} />
+        <ProtectedRoute path="/confirm" component={ConfirmOrder} />
         <ProtectedRoute path="/success" component={orderSuccess} />
 
         <ProtectedRoute path="/orders/user" component={ListOrders} />

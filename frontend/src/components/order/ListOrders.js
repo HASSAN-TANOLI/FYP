@@ -21,7 +21,7 @@ const ListOrders = () => {
 
         if (error) {
             alert.error(error);
-            dispatch(clearErrors())
+            dispatch(clearErrors)
         }
     }, [dispatch, alert, error])
 
@@ -61,7 +61,7 @@ const ListOrders = () => {
             data.rows.push({
                 id: order._id,
                 numOfItems: order.orderItems.length,
-                amount: `$${order.totalPrice}`,
+                amount: `${order.totalPrice} Rs`,
                 status: order.orderStatus && String(order.orderStatus).includes('Delivered')
                     ? <p style={{ color: 'green' }}>{order.orderStatus}</p>
                     : <p style={{ color: 'red' }}>{order.orderStatus}</p>,

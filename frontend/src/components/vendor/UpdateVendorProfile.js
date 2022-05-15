@@ -44,7 +44,7 @@ const UpdateVendorProfile = ({ history }) => {
 
     if (error) {
       alert.error(error);
-      dispatch(clearErrors());
+      dispatch(clearErrors);
       console.log("got it");
     }
 

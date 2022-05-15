@@ -32,7 +32,7 @@ const ProductDetails = ({ match }) => {
 
     if (error) {
       alert.error(error);
-      dispatch(clearErrors());
+      dispatch(clearErrors);
     }
 
     
