@@ -94,7 +94,7 @@ const Header = () => {
               </div>
             </div>
           ) : (
-            !loading && (
+            !vendor && (
               <Link to="/login" className="btn ml-4" id="login_btn">
                 Login
               </Link>
@@ -102,7 +102,7 @@ const Header = () => {
           )}
 
           {vendor ? (
-            <div className="ml-3 dropdown d-inline">
+            <div className="ml-3 dropdown d-inline" key={vendor}>
               <Link
                 to=""
                 className=" btn dropdown-toggle mr-4 text-white"
@@ -123,7 +123,7 @@ const Header = () => {
               </Link>
 
               <div className="dropdown-menu" aria-labelledby="dropDownMenuLink">
-                {vendor && vendor.role != "vendor" ? (
+                {vendor && vendor.role !== "vendor" ? (
                   <Link className="dropdown-item" to="orders/user">
                     orders
                   </Link>
@@ -146,14 +146,10 @@ const Header = () => {
               </div>
             </div>
           ) : (
-            !loadingg &&  (
-              
+            !user && (
               <Link to="/loginvendor" className="btn mr-4" id="login_btn">
-                
-                  Vendor Login 
+                Vendor Login
               </Link>
-              
-             
             )
           )}
         </div>

@@ -6,7 +6,6 @@ import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-    
 import "./pcBuildd.css";
 
 const PcBuildd = ({}) => {
@@ -172,7 +171,14 @@ const PcBuildd = ({}) => {
                       </td>
                       <td>{build?.cpu?.name}</td>
                       <td>{build?.cpu?.price}</td>
-                      <td> </td>
+                      <td>
+                        {" "}
+                        <i
+                          class="fa fa-trash"
+                          aria-hidden="true"
+                          onClick={() => setBuild({ ...build, cpu: "" })}
+                        ></i>{" "}
+                      </td>
                     </tr>
 
                     <tr>
@@ -206,10 +212,13 @@ const PcBuildd = ({}) => {
                       <td>{build?.motherBoards?.price}</td>
                       <td>
                         {" "}
-                        <a href="">
-                          {" "}
-                          <i class="fa fa-trash" aria-hidden="true"></i>{" "}
-                        </a>{" "}
+                        <i
+                          class="fa fa-trash"
+                          aria-hidden="true"
+                          onClick={() =>
+                            setBuild({ ...build, motherBoards: "" })
+                          }
+                        ></i>{" "}
                       </td>
                     </tr>
 
@@ -450,7 +459,9 @@ const PcBuildd = ({}) => {
               <br></br>
               <label class="totalAmount">Total Amount: {total}</label>
               <Link to="/soon">
-                <button type="button" className="proceed">Proceed</button>
+                <button type="button" className="proceed">
+                  Proceed
+                </button>
               </Link>
 
               <br></br>
