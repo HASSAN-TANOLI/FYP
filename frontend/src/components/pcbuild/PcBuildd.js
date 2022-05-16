@@ -254,10 +254,13 @@ const PcBuildd = ({}) => {
                       <td>{build?.rams?.price}</td>
                       <td>
                         {" "}
-                        <a href="">
-                          {" "}
-                          <i class="fa fa-trash" aria-hidden="true"></i>{" "}
-                        </a>{" "}
+                        <i
+                          class="fa fa-trash"
+                          aria-hidden="true"
+                          onClick={() =>
+                            setBuild({ ...build, rams: "" })
+                          }
+                        ></i>{" "}
                       </td>
                     </tr>
 
@@ -292,10 +295,13 @@ const PcBuildd = ({}) => {
                       <td>{build?.storages?.price}</td>
                       <td>
                         {" "}
-                        <a href="">
-                          {" "}
-                          <i class="fa fa-trash" aria-hidden="true"></i>{" "}
-                        </a>{" "}
+                        <i
+                          class="fa fa-trash"
+                          aria-hidden="true"
+                          onClick={() =>
+                            setBuild({ ...build, storages: "" })
+                          }
+                        ></i>{" "}
                       </td>
                     </tr>
 
@@ -331,10 +337,13 @@ const PcBuildd = ({}) => {
                       <td>{build?.graphiccards?.price}</td>
                       <td>
                         {" "}
-                        <a href="">
-                          {" "}
-                          <i class="fa fa-trash" aria-hidden="true"></i>{" "}
-                        </a>{" "}
+                        <i
+                          class="fa fa-trash"
+                          aria-hidden="true"
+                          onClick={() =>
+                            setBuild({ ...build, graphiccards: "" })
+                          }
+                        ></i>{" "}
                       </td>
                     </tr>
 
@@ -369,10 +378,13 @@ const PcBuildd = ({}) => {
                       <td>{build?.powerSupplys?.price}</td>
                       <td>
                         {" "}
-                        <a href="">
-                          {" "}
-                          <i class="fa fa-trash" aria-hidden="true"></i>{" "}
-                        </a>{" "}
+                        <i
+                          class="fa fa-trash"
+                          aria-hidden="true"
+                          onClick={() =>
+                            setBuild({ ...build, powerSupplys: "" })
+                          }
+                        ></i>{" "}
                       </td>
                     </tr>
 
@@ -407,10 +419,13 @@ const PcBuildd = ({}) => {
                       <td>{build?.cases?.price}</td>
                       <td>
                         {" "}
-                        <a href="">
-                          {" "}
-                          <i class="fa fa-trash" aria-hidden="true"></i>{" "}
-                        </a>{" "}
+                        <i
+                          class="fa fa-trash"
+                          aria-hidden="true"
+                          onClick={() =>
+                            setBuild({ ...build, cases: "" })
+                          }
+                        ></i>{" "}
                       </td>
                     </tr>
 
@@ -446,10 +461,13 @@ const PcBuildd = ({}) => {
 
                       <td>
                         {" "}
-                        <a href="">
-                          {" "}
-                          <i class="fa fa-trash" aria-hidden="true"></i>{" "}
-                        </a>{" "}
+                        <i
+                          class="fa fa-trash"
+                          aria-hidden="true"
+                          onClick={() =>
+                            setBuild({ ...build, monitors: "" })
+                          }
+                        ></i>{" "}
                       </td>
                     </tr>
                   </tbody>
