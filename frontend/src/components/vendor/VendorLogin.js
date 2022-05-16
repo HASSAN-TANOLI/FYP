@@ -23,7 +23,8 @@ const VendorLogin = ({ history, location }) => {
 
   useEffect(() => {
     if (isAuthenticatedVendor) {
-      history.push(redirect);
+      window.location.replace("/");
+      // history.push('redirect');
     }
 
     if (error) {
@@ -34,6 +35,7 @@ const VendorLogin = ({ history, location }) => {
 
   const submitHandler = (e) => {
     e.preventDefault(); //prevent it from reloading
+
     dispatch(vendorLoginn(vendoremail, password));
   };
 
