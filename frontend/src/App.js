@@ -25,6 +25,8 @@ import RegisterVendor from "./components/vendor/RegisterVendor";
 import VendorProfile from "./components/vendor/VendorProfile";
 import UpdateVendorProfile from "./components/vendor/UpdateVendorProfile";
 import { loadVendor, allVendors } from "./actions/vendorActions";
+import UpdateVendorPassword from "./components/vendor/UpdateVendorPassword";
+import ForgotVendorPassword from "./components/vendor/ForgotVendorPassword";
 
 //Protected Routes
 import ProtectedRoute from "./components/route/ProtectedRoute";
@@ -112,6 +114,10 @@ const[stripeApiKey, setStripeApiKey] = useState('')
         <Route path="/login" component={Login} />
         <Route path="/loginvendor" component={VendorLogin} />
         <Route path="/registervendor" component={RegisterVendor} />
+        <Route path="/vendorpassword/update" component={UpdateVendorPassword} />
+        <Route path="/vendorpassword/forgot" component={ForgotVendorPassword} />
+        
+
 
         <Route path="/register" component={Register} />
         <Route path="/userpassword/forgot" component={ForgotPassword} exact />

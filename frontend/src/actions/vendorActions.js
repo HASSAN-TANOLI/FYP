@@ -19,6 +19,13 @@ import {
   ALL_VENDORS_REQUEST,
   ALL_VENDORS_SUCCESS,
   ALL_VENDORS_FAIL,
+  UPDATE_VENDOR_PASSWORD_REQUEST,
+  UPDATE_VENDOR_PASSWORD_SUCCESS,
+  UPDATE_VENDOR_PASSWORD_FAIL,
+  UPDATE_VENDOR_PASSWORD_RESET,
+  FORGOT_VENDOR_PASSWORD_REQUEST,
+  FORGOT_VENDOR_PASSWORD_SUCCESS,
+  FORGOT_VENDOR_PASSWORD_FAIL,
 } from "../constants/vendorConstants";
 
 // Login
@@ -145,6 +152,36 @@ export const updateVendorProfile = (vendorData) => async (dispatch) => {
   }
 };
 
+
+// Update password
+export const updateVendorPassword = (passwords) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_VENDOR_PASSWORD_REQUEST });
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.put(
+      "/api/v1/vendorpassword/update",
+      passwords,
+      config
+    );
+
+    dispatch({
+      type: UPDATE_VENDOR_PASSWORD_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_VENDOR_PASSWORD_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
 // Get all Vendors
 export const allVendors = () => async (dispatch) => {
   try {
@@ -166,6 +203,37 @@ export const allVendors = () => async (dispatch) => {
     });
   }
 };
+
+// Forgot password
+export const forgotVendorPassword = (email) => async (dispatch) => {
+  //we have to pass email as an argument to this function because user has to give email in order to get conformation email
+  try {
+    dispatch({ type: FORGOT_VENDOR_PASSWORD_REQUEST });
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.post(
+      "/api/v1/vendorpassword/forgot",
+      email,
+      config
+    );
+
+    dispatch({
+      type: FORGOT_VENDOR_PASSWORD_SUCCESS,
+      payload: data.message,
+    });
+  } catch (error) {
+    dispatch({
+      type: FORGOT_VENDOR_PASSWORD_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
 
 //Clear Errors
 

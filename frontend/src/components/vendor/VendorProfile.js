@@ -68,7 +68,7 @@ const VendorProfile = () => {
                 )}
 
                 <Link
-                  to="/password/update"
+                  to="/vendorpassword/update"
                   className="btn btn-primary btn-block mt-3"
                 >
                   Change Password

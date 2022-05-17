@@ -70,6 +70,7 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
 
 exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email }); //finding the email in database the user provided
+  
 
   if (!user) {
     return next(new ErrorHandler("User NOT found with this email", 404));
@@ -82,7 +83,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
   //Create resetpassword url
 
-  const resetUrl = `${req.protocol}://${req.get('host')}/userpassword/reset/${resetToken}`;
+  const resetUrl = `${process.env.FRONTEND_URL}/userpassword/reset/${resetToken}`;
 
   const message = `your password reset token is as follow: \n\n ${resetUrl}\n\n if you have not requested this email, then ignore it.`;
 

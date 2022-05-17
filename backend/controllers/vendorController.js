@@ -47,13 +47,13 @@ exports.registerVendor = catchAsyncErrors(async (req, res, next) => {
 exports.loginVendor = catchAsyncErrors(async (req, res, next) => {
   const { vendoremail, password } = req.body;
 
-  //Check if email and password is entered by user
+  //Check if email and password is entered by vendor
 
   if (!vendoremail || !password) {
     return next(new ErrorHandler("Please enter email and password", 400));
   }
 
-  // If upper condition matches then it will find that user in database
+  // If upper condition matches then it will find that vendor in database
 
   const vendor = await Vendor.findOne({ vendoremail }).select("+password");
 
@@ -73,46 +73,44 @@ exports.loginVendor = catchAsyncErrors(async (req, res, next) => {
 
 //Forgot Password => /api/v1/vendorpassword/forgot/
 
-exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
-  //Firslty i need to get the given input email from vendor
 
-  const vendor = await Vendor.findOne({ vendoremail: req.body.vendoremail });
+
+exports.forgotVendorPassword = catchAsyncErrors(async (req, res, next) => {
+  const vendor = await Vendor.findOne({ vendoremail: req.body.vendoremail }); //finding the email in database the vendor provided
+  console.log(vendor);
 
   if (!vendor) {
-    return next(new ErrorHandler("User not found with this email", 404));
+    return next(new ErrorHandler("vendor NOT found with this email", 404));
   }
 
-  //If user exists then  getting reset token
-
+  //Get resetToken
   const resetToken = vendor.getResetPasswordToken();
 
-  // validateBeforeSave is use because nodejs validate the data before saving it. so we need to save directly.
   await vendor.save({ validateBeforeSave: false });
 
-  //Create the reset password URl
+  //Create resetpassword url
 
-  const resetUrl = `${req.protocol}://${req.get(
-    "host"
-  )}/api/v1/vendorpassword/reset/${resetToken}`;
+  const resetUrl = `${process.env.FRONTEND_URL}/vendorpassword/reset/${resetToken}`;
 
   const message = `your password reset token is as follow: \n\n ${resetUrl}\n\n if you have not requested this email, then ignore it.`;
 
   try {
     await sendEmail({
-      email: vendor.vendoremail,
-      subject: "Password Recovery",
+      vendoremail: vendor.vendoremail,
+      subject: "vendor Password recovery",
       message,
     });
 
     res.status(200).json({
       success: true,
-      message: `Email send to ${vendor.vendoremail}`,
+      message: `Email sent to: ${vendor.vendoremail}`,
     });
   } catch (error) {
     vendor.resetPasswordToken = undefined;
     vendor.resetPasswordExpire = undefined;
 
     await vendor.save({ validateBeforeSave: false });
+
     return next(new ErrorHandler(error.message, 500));
   }
 });
@@ -169,7 +167,7 @@ exports.getVendorProfile = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Update user profile   =>   /api/v1/user/update
+// Update vendor profile   =>   /api/v1/vendor/update
 exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
   const newVendorData = {
     vendorname: req.body.vendorname,
@@ -179,6 +177,8 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     shopcontactno: req.body.shopcontactno,
     vendoremail: req.body.vendoremail,
   };
+
+
 
   // Update avatar
   if (req.body.avatar !== "") {
@@ -209,6 +209,25 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     success: true,
   });
 });
+
+// Update / Change password   =>  /api/v1/vendorpassword/update
+exports.updateVendorPassword = catchAsyncErrors(async (req, res, next) => {
+  const vendor = await Vendor.findById(req.vendor.id).select("+password");
+
+  // Check previous vendor password
+  const isMatched = await vendor.comparePassword(req.body.oldPassword);
+  if (!isMatched) {
+    return next(new ErrorHandler("Old password is incorrect"));
+  }
+
+  vendor.password = req.body.password;
+  await vendor.save();
+
+  sendToken(vendor, 200, res);
+});
+
+
+
 
 // Get all vendors   =>   /api/v1/admin/vendors
 exports.allVendors = catchAsyncErrors(async (req, res, next) => {
