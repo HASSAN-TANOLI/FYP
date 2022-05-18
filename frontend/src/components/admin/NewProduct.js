@@ -49,7 +49,7 @@ const NewProduct = ({ history }) => {
   useEffect(() => {
     if (error) {
       alert.error(error);
-      dispatch(clearErrors());
+      dispatch(clearErrors);
     }
 
     if (success) {
