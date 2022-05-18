@@ -95,10 +95,11 @@ const PcBuildd = ({}) => {
 
   useEffect(() => {
     console.log("build changed", build);
-
+    let _total = 0;
     Object.keys(build).forEach((key) => {
-      setTotal(total + build[key].price);
+      _total += build[key].price || 0;
     });
+    setTotal(_total);
   }, [build]);
 
   return (
@@ -110,7 +111,7 @@ const PcBuildd = ({}) => {
           className="combobox1"
           onChange={(e) => setSelectedVendor(e.target.value)}
         >
-          <option value={null} selected>
+          <option value={null} selected disabled>
             Select a store
           </option>
           {vendors.map((vendor) => {
@@ -154,7 +155,7 @@ const PcBuildd = ({}) => {
                             })
                           }
                         >
-                          <option value={null} selected>
+                          <option value={null} selected disabled>
                             Select a CPU
                           </option>
                           {cpus.map((product) => {
@@ -193,7 +194,7 @@ const PcBuildd = ({}) => {
                             })
                           }
                         >
-                          <option value={null} selected>
+                          <option value={null} selected disabled>
                             Select a Motherboard
                           </option>
                           {motherBoards.map((product) => {
@@ -235,7 +236,7 @@ const PcBuildd = ({}) => {
                             })
                           }
                         >
-                          <option value={null} selected>
+                          <option value={null} selected disabled>
                             Select a Ram
                           </option>
                           {rams.map((product) => {
@@ -257,9 +258,7 @@ const PcBuildd = ({}) => {
                         <i
                           class="fa fa-trash"
                           aria-hidden="true"
-                          onClick={() =>
-                            setBuild({ ...build, rams: "" })
-                          }
+                          onClick={() => setBuild({ ...build, rams: "" })}
                         ></i>{" "}
                       </td>
                     </tr>
@@ -276,7 +275,7 @@ const PcBuildd = ({}) => {
                             })
                           }
                         >
-                          <option value={null} selected>
+                          <option value={null} selected disabled>
                             Select a Storage
                           </option>
                           {storages.map((product) => {
@@ -298,9 +297,7 @@ const PcBuildd = ({}) => {
                         <i
                           class="fa fa-trash"
                           aria-hidden="true"
-                          onClick={() =>
-                            setBuild({ ...build, storages: "" })
-                          }
+                          onClick={() => setBuild({ ...build, storages: "" })}
                         ></i>{" "}
                       </td>
                     </tr>
@@ -318,7 +315,7 @@ const PcBuildd = ({}) => {
                             })
                           }
                         >
-                          <option value={null} selected>
+                          <option value={null} selected disabled>
                             Select a GPU
                           </option>
                           {gpus.map((product) => {
@@ -359,7 +356,7 @@ const PcBuildd = ({}) => {
                             })
                           }
                         >
-                          <option value={null} selected>
+                          <option value={null} selected disabled>
                             Select a PowerSupply
                           </option>
                           {powerSupplys.map((product) => {
@@ -400,7 +397,7 @@ const PcBuildd = ({}) => {
                             })
                           }
                         >
-                          <option value={null} selected>
+                          <option value={null} selected disabled>
                             Select a Casing
                           </option>
                           {cases.map((product) => {
@@ -422,9 +419,7 @@ const PcBuildd = ({}) => {
                         <i
                           class="fa fa-trash"
                           aria-hidden="true"
-                          onClick={() =>
-                            setBuild({ ...build, cases: "" })
-                          }
+                          onClick={() => setBuild({ ...build, cases: "" })}
                         ></i>{" "}
                       </td>
                     </tr>
@@ -441,7 +436,7 @@ const PcBuildd = ({}) => {
                             })
                           }
                         >
-                          <option value={null} selected>
+                          <option value={null} selected disabled>
                             Select a Moniter
                           </option>
                           {monitors.map((product) => {
@@ -464,9 +459,7 @@ const PcBuildd = ({}) => {
                         <i
                           class="fa fa-trash"
                           aria-hidden="true"
-                          onClick={() =>
-                            setBuild({ ...build, monitors: "" })
-                          }
+                          onClick={() => setBuild({ ...build, monitors: "" })}
                         ></i>{" "}
                       </td>
                     </tr>
