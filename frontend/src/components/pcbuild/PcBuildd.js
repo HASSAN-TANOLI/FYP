@@ -155,7 +155,7 @@ const PcBuildd = ({}) => {
                             })
                           }
                         >
-                          <option value={null} selected disabled>
+                          <option value={null} selected >
                             Select a CPU
                           </option>
                           {cpus.map((product) => {
@@ -194,7 +194,7 @@ const PcBuildd = ({}) => {
                             })
                           }
                         >
-                          <option value={null} selected disabled>
+                          <option value={null} selected >
                             Select a Motherboard
                           </option>
                           {motherBoards.map((product) => {
@@ -236,7 +236,7 @@ const PcBuildd = ({}) => {
                             })
                           }
                         >
-                          <option value={null} selected disabled>
+                          <option value={null} selected >
                             Select a Ram
                           </option>
                           {rams.map((product) => {
@@ -275,7 +275,7 @@ const PcBuildd = ({}) => {
                             })
                           }
                         >
-                          <option value={null} selected disabled>
+                          <option value={null} selected >
                             Select a Storage
                           </option>
                           {storages.map((product) => {
@@ -315,7 +315,7 @@ const PcBuildd = ({}) => {
                             })
                           }
                         >
-                          <option value={null} selected disabled>
+                          <option value={null} selected >
                             Select a GPU
                           </option>
                           {gpus.map((product) => {
@@ -356,7 +356,7 @@ const PcBuildd = ({}) => {
                             })
                           }
                         >
-                          <option value={null} selected disabled>
+                          <option value={null} selected>
                             Select a PowerSupply
                           </option>
                           {powerSupplys.map((product) => {
@@ -397,7 +397,7 @@ const PcBuildd = ({}) => {
                             })
                           }
                         >
-                          <option value={null} selected disabled>
+                          <option value={null} selected>
                             Select a Casing
                           </option>
                           {cases.map((product) => {
@@ -436,7 +436,7 @@ const PcBuildd = ({}) => {
                             })
                           }
                         >
-                          <option value={null} selected disabled>
+                          <option value={null} selected >
                             Select a Moniter
                           </option>
                           {monitors.map((product) => {
@@ -468,9 +468,7 @@ const PcBuildd = ({}) => {
               </div>
               <br></br>
               <br></br>
-              <label class="totalAmount">Total Amount: {
-              
-              }</label>
+              <label class="totalAmount">Total Amount: {total}</label>
               <Link to="/soon">
                 <button type="button" className="proceed">
                   Proceed

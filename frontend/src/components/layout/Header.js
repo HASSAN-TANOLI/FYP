@@ -30,7 +30,7 @@ const Header = () => {
   return (
     <Fragment>
       <nav className="navbar row">
-        <div className="col-12 col-md-3">
+        <div className="col-12 col-md-2">
           <div className="navbar-brand">
             <Link to="/">
               <img className="image" src="/images/logo1.png" />
@@ -42,7 +42,7 @@ const Header = () => {
           <Route render={({ history }) => <Search history={history} />} />
         </div>
 
-        <div className="col-sm-12 col-12 col-md-3 lg-4 mt-4 mt-md-0  text-center">
+        <div className="col-sm-12 col-12 col-md-4 lg-3 mt-4 mt-md-0  text-center">
           <Link to="/pcbuildd" className="btn ml-1" id="login_btn">
             Build Pc
           </Link>
