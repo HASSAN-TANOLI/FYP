@@ -38,7 +38,7 @@ const ProductDetails = ({ match }) => {
     
     if (reviewError) {
       alert.error(reviewError);
-      dispatch(clearErrors());
+      dispatch(clearErrors);
     }
 
     if (success) {
@@ -149,9 +149,9 @@ const ProductDetails = ({ match }) => {
               <hr />
 
               <div className="rating-outer">
-                <div className="rating-inner"></div>
-              </div>
+                <div className="rating-inner"style={{ width: `${(product.ratings / 5) * 100}%` }}>  </div>
               <span id="no_of_reviews">({product.numOfReviews}Reviews)</span>
+              </div>
 
               <hr />
 
@@ -176,10 +176,15 @@ const ProductDetails = ({ match }) => {
                 type="button"
                 id="cart_btn"
                 className="btn btn-primary d-inline ml-4"
+                disabled={product.stock ===0 }
                 onClick={addToCart}
+               
               >
                 Add to Cart
               </button>
+              
+ 
+
 
               <hr />
 
@@ -189,7 +194,7 @@ const ProductDetails = ({ match }) => {
                   id="stock_status"
                   className={product.stock > 0 ? "greenColor" : "redColor"}
                 >
-                  {product.stock > 0 ? "In Stock" : "Out of Stock"}
+                  {product.stock > 0 ? "In Stock" : "Out of Stock" }
                 </span>
               </p>
 

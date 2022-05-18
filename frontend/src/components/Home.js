@@ -5,7 +5,6 @@ import Loader from "./layout/Loader";
 import  Pagination from 'react-js-pagination';
 import {useDispatch, useSelector} from 'react-redux';
 import { useAlert } from 'react-alert';
-import {allVendors} from"../actions/vendorActions";
 import { getProducts } from '../actions/productActions';
 
 
@@ -86,7 +85,7 @@ const Home = ({match}) => {
       <MetaData title={'buy best product online'} />
       
       
-       <h1 id="products_heading">Latest Products</h1>
+       {/* <h1 id="products_heading">Latest Products</h1> */}
        <section id="products" class="container mt-5">
       <div className="row">
 

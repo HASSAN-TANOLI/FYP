@@ -67,7 +67,7 @@ exports.myOrders = catchAsyncErrors(async (req, res, next) => {
 
 // Get all orders - ADMIN  =>   /api/v1/admin/orders/
 exports.allOrders = catchAsyncErrors(async (req, res, next) => {
-    const orders = await Order.find()
+    const orders = await Order.find({})
 
     let totalAmount = 0;
 

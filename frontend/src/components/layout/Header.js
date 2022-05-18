@@ -38,16 +38,16 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="col-12 col-md-6 mt-2 mt-md-0  searchbar">
+        <div className="col-sm-12 col-12 col-md-6 mt-2 mt-md-0  searchbar">
           <Route render={({ history }) => <Search history={history} />} />
         </div>
 
-        <div className="col-12 col-md-3 mt-4 mt-md-0  text-center">
+        <div className="col-sm-12 col-12 col-md-3 lg-4 mt-4 mt-md-0  text-center">
           <Link to="/pcbuildd" className="btn ml-1" id="login_btn">
             Build Pc
           </Link>
           <Link to="/cart" style={{ textDecoration: "none" }}>
-            <span id="cart" className="ml-8">
+            <span id="cart" className="mr-1 ml-2">
               Cart
             </span>
             <span className="ml-1" id="cart_count">
@@ -95,7 +95,7 @@ const Header = () => {
             </div>
           ) : (
             !vendor && (
-              <Link to="/login" className="btn ml-4" id="login_btn">
+              <Link to="/login" className="btn ml-4 mr-1" id="login_btn">
                 Login
               </Link>
             )
@@ -147,7 +147,7 @@ const Header = () => {
             </div>
           ) : (
             !user && (
-              <Link to="/loginvendor" className="btn mr-4" id="login_btn">
+              <Link to="/loginvendor" className="btn mr-5 ml-2" id="login_btn">
                 Vendor Login
               </Link>
             )
