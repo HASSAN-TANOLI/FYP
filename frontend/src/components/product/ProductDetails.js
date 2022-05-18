@@ -42,7 +42,7 @@ const ProductDetails = ({ match }) => {
     }
 
     if (success) {
-      alert.success(success);
+      alert.success("review added successfully");
       dispatch({type: NEW_REVIEW_RESET});
     }
 

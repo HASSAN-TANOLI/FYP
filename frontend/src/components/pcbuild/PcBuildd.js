@@ -475,7 +475,9 @@ const PcBuildd = ({}) => {
               </div>
               <br></br>
               <br></br>
-              <label class="totalAmount">Total Amount: {total}</label>
+              <label class="totalAmount">Total Amount: {
+              
+              }</label>
               <Link to="/soon">
                 <button type="button" className="proceed">
                   Proceed
