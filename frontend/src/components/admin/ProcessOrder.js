@@ -29,7 +29,7 @@ const ProcessOrder = ({ match }) => {
 
         if (error) {
             alert.error(error);
-            dispatch(clearErrors)
+            dispatch(clearErrors())
         }
 
 
@@ -139,7 +139,7 @@ const ProcessOrder = ({ match }) => {
                             </div>
                         )}
                     </Fragment>
-                </div>
+                </div>     
             </div>
 
         </Fragment>

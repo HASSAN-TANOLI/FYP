@@ -54,6 +54,7 @@ import orderSuccess from "./components/cart/orderSuccess";
 import ListOrders from "./components/order/ListOrders";
 import OrderDetails from "./components/order/orderDetails";
 import OrdersList from "./components/admin/OrdersList";
+import ProcessOrder from "./components/admin/ProcessOrder";
 
 
 
@@ -102,6 +103,7 @@ const[stripeApiKey, setStripeApiKey] = useState('')
         <ProtectedRoute path="/orders/user" component={ListOrders} />
         <ProtectedRoute path="/order/:id" component={OrderDetails} />
         <ProtectedRoutes path="/admin/orders" isAdmin={true} component={OrdersList} exact/>
+        <ProtectedRoutes path="/admin/order/:id" isAdmin={true} component={ProcessOrder} exact/>
 
 
     {/* //we pass stripeApiKey on backend */}
